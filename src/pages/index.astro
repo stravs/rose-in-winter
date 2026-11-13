@@ -133,7 +133,7 @@ const jsonLd = {
             <p class="mt-3 text-muted">Reviews and scores from guests who booked on Booking.com.</p>
           </div>
           <dl class="grid grid-cols-3 gap-x-6 gap-y-4 text-sm text-muted sm:flex sm:flex-wrap sm:gap-x-10">
-            <div class="col-span-3 flex flex-col-reverse"><dt>Booking.com · {rating.count} reviews</dt><dd class="font-serif text-5xl text-ink">{rating.value.toFixed(1)}</dd></div>
+            <div class="col-span-3 flex flex-col-reverse"><dt><a href={rating.url} target="_blank" rel="noopener noreferrer" class="link">Booking.com · {rating.count} reviews</a></dt><dd class="font-serif text-5xl text-ink">{rating.value.toFixed(1)}</dd></div>
             {rating.categories.map((category) => <div class="flex flex-col-reverse"><dt>{category.label}</dt><dd class="font-serif text-5xl text-ink">{category.value.toFixed(1)}</dd></div>)}
           </dl>
         </div>
@@ -147,7 +147,7 @@ const jsonLd = {
             ))}
           </div>
         )}
-        <a href={rating.url} target="_blank" rel="noopener noreferrer" class="mt-6 inline-block link">Read all {rating.count} reviews on Booking.com ↗</a>
+        <a href={rating.url} target="_blank" rel="noopener noreferrer" class="mt-6 inline-block link">Read all {rating.count} reviews on Booking.com</a>
       </div>
     </section>
   )}
@@ -173,7 +173,7 @@ const jsonLd = {
       </div>
       <div data-reveal style="--reveal-delay:150ms" class="flex flex-col gap-4">
         <iframe class="w-full grow min-h-96 rounded-2xl border-0 bg-soft" src={mapEmbed} title={`Map showing ${property.name}, ${property.city}`} loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        <a class="link self-start" href={mapLink} target="_blank" rel="noopener noreferrer">Directions in Google Maps ↗</a>
+        <a class="link self-start" href={mapLink} target="_blank" rel="noopener noreferrer">Directions in Google Maps</a>
       </div>
     </div>
   </section>
