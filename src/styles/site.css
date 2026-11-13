@@ -1,0 +1,35 @@
+@import "tailwindcss";
+
+/* Self-hosted fonts (public/fonts); Tailwind has no utility for @font-face. */
+@font-face { font-family: Newsreader; src: url('/fonts/newsreader.woff2') format('woff2'); font-weight: 200 800; font-display: swap; }
+@font-face { font-family: Manrope; src: url('/fonts/manrope.woff2') format('woff2'); font-weight: 200 800; font-display: swap; }
+
+/* Quiet: warm neutrals so the painting and photos carry the colour. Accent (roof red) is only for the primary action. Overridden by site.json design.colors. */
+@theme {
+  --color-bg: #FBF8F2;
+  --color-soft: #EEE8DD;
+  --color-dark: #24211D;
+  --color-accent: #B23F1E;
+  --color-ink: #24211D;
+  --color-muted: #5F5A52;
+  --font-serif: Newsreader, Georgia, serif;
+  --font-sans: Manrope, system-ui, sans-serif;
+}
+
+/* One primary and one secondary button, same size everywhere. */
+@utility btn {
+  @apply inline-flex items-center justify-center rounded-full px-6 py-3 text-base font-semibold whitespace-nowrap transition-colors;
+}
+@utility btn-primary {
+  @apply btn bg-accent text-white hover:brightness-90;
+}
+@utility btn-secondary {
+  @apply btn border border-current/35 hover:bg-current/10;
+}
+@utility link {
+  @apply underline decoration-current/35 underline-offset-4 hover:decoration-current;
+}
+
+@layer base {
+  html { scroll-behavior: smooth; }
+}

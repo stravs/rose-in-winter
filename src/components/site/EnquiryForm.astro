@@ -1,0 +1,39 @@
+---
+import type { Property } from '../../domain/property';
+interface Props { property: Property; /** Apartment preselected in the form. */ selected?: string; class?: string }
+const { property, selected, class: className } = Astro.props;
+const field = 'border border-ink/50 rounded-xl py-2.5 bg-white text-base';
+---
+<aside id="enquiry" class="scroll-mt-6" aria-labelledby="enquiry-title">
+  <div class:list={['relative bg-white rounded-2xl p-6 sm:p-8 border border-ink/10 shadow-xl shadow-dark/5', className]}>
+    <h2 id="enquiry-title" class="font-serif text-3xl">Send enquiry</h2>
+    <p class="text-muted mt-2">We'll reply with availability and the price for your dates.</p>
+    <form class="mt-6 grid grid-cols-2 gap-3 text-sm" data-enquiry>
+      <label class="col-span-2 flex flex-col gap-1">Name<input required name="name" autocomplete="name" class={`${field} px-3`} /></label>
+      <label class="col-span-2 flex flex-col gap-1">Email<input required type="email" name="email" autocomplete="email" class={`${field} px-3`} /></label>
+      <label class="flex flex-col gap-1 min-w-0">Arrival<input required type="date" name="arrival" class={`${field} px-2 min-w-0`} /></label>
+      <label class="flex flex-col gap-1 min-w-0">Departure<input required type="date" name="departure" class={`${field} px-2 min-w-0`} /></label>
+      <label class="flex flex-col gap-1">Adults<select name="guests" class={`${field} px-3`}><option>1</option><option selected>2</option><option>3</option><option>4</option></select></label>
+      <label class="flex flex-col gap-1 min-w-0">Apartment<select name="apartment" class={`${field} px-3 min-w-0`}><option>Any</option>{property.units.map((unit) => <option selected={unit.name === selected}>{unit.name}</option>)}</select></label>
+      <label class="col-span-2 flex flex-col gap-1">Message<textarea name="message" rows="3" class={`${field} px-3`}></textarea></label>
+      <button class="col-span-2 btn-primary mt-2">Send enquiry</button>
+      <p class="col-span-2 text-muted" role="status" data-status></p>
+    </form>
+  </div>
+</aside>
+<script>
+  const form = document.querySelector<HTMLFormElement>('[data-enquiry]');
+  const status = form?.querySelector('[data-status]');
+  // "Enquire" buttons elsewhere on the page preselect their apartment.
+  document.querySelectorAll<HTMLButtonElement>('[data-unit]').forEach((button) => button.addEventListener('click', () => {
+    if (!form) return;
+    (form.elements.namedItem('apartment') as HTMLSelectElement).value = button.dataset.unit ?? 'Any';
+    document.querySelector('#enquiry')?.scrollIntoView();
+    (form.elements.namedItem('name') as HTMLInputElement).focus({ preventScroll: true });
+  }));
+  // No delivery target yet: the form never sends.
+  form?.addEventListener('submit', (event) => {
+    event.preventDefault();
+    if (status) status.textContent = 'Preview: enquiries are not sent yet.';
+  });
+</script>

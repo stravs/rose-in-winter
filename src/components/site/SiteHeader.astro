@@ -1,0 +1,19 @@
+---
+import type { Property } from '../../domain/property';
+import Logo from './Logo.astro';
+interface Props { property: Property; /** White text over the homepage hero photo. */ overlay?: boolean }
+const { property, overlay = false } = Astro.props;
+const link = 'hover:underline underline-offset-4';
+---
+<header class:list={['relative', overlay ? 'text-white text-shadow-sm text-shadow-dark/70 bg-linear-to-b from-dark/75 via-dark/35 to-transparent pb-10' : 'text-ink border-b border-ink/10']}>
+  <div class="mx-auto w-full max-w-7xl px-4 sm:px-6 h-20 flex items-center justify-between gap-4">
+    <Logo {property} />
+    <nav class="hidden md:flex gap-8 text-lg font-semibold" aria-label="Main navigation">
+      <a href="/#apartments" class={link}>Apartments</a>
+      {property.bookingRating && <a href="/#reviews" class={link}>Reviews</a>}
+      <a href="/#location" class={link}>Location</a>
+    </nav>
+    <!-- Below lg the page's own enquiry buttons are used (hero, apartment pages). -->
+    <a href="#enquiry" class:list={['max-lg:hidden', overlay ? 'btn bg-white text-dark text-shadow-none hover:bg-soft' : 'btn-primary']}>Send enquiry</a>
+  </div>
+</header>

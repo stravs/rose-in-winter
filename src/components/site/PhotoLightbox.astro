@@ -1,0 +1,58 @@
+---
+import type { PropertyPhoto } from '../../domain/property';
+interface Props { photos: PropertyPhoto[]; title: string }
+const { photos, title } = Astro.props;
+const nav = 'shrink-0 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 text-2xl';
+---
+<!-- Opened by any button with data-photo="<index>". -->
+<dialog id="lightbox" data-photos={JSON.stringify(photos.map(({ url, alt }) => ({ url, alt })))} aria-label={`Photos of ${title}`}
+  class="m-0 w-full h-full max-w-none max-h-none bg-dark text-white p-0 backdrop:bg-dark">
+  <div class="h-full flex flex-col">
+    <div class="flex items-center justify-between gap-4 px-4 sm:px-6 h-16">
+      <p class="text-sm">{title} · <span data-current>1</span> / {photos.length}</p>
+      <button type="button" data-close class="w-11 h-11 rounded-full hover:bg-white/10 text-3xl leading-none" aria-label="Close photos">×</button>
+    </div>
+    <div class="flex-1 min-h-0 flex items-center gap-2 sm:gap-4 px-2 sm:px-6 pb-6">
+      <button type="button" data-step="-1" class={nav} aria-label="Previous photo">‹</button>
+      <figure class="flex-1 min-w-0 h-full flex flex-col items-center justify-center gap-3">
+        <img data-image alt="" class="max-w-[min(100%,64rem)] max-h-[calc(100%-2.5rem)] object-contain rounded-xl" />
+        <figcaption data-caption class="text-sm text-white/70 text-center"></figcaption>
+      </figure>
+      <button type="button" data-step="1" class={nav} aria-label="Next photo">›</button>
+    </div>
+  </div>
+</dialog>
+<script>
+  const dialog = document.querySelector<HTMLDialogElement>('#lightbox');
+  if (dialog) {
+    const photos = JSON.parse(dialog.dataset.photos ?? '[]') as Array<{ url: string; alt?: string }>;
+    const image = dialog.querySelector<HTMLImageElement>('[data-image]')!;
+    const caption = dialog.querySelector('[data-caption]')!;
+    const current = dialog.querySelector('[data-current]')!;
+    let index = 0;
+    let touchX = 0;
+    const show = (next: number) => {
+      index = (next + photos.length) % photos.length;
+      const photo = photos[index]!;
+      image.src = photo.url;
+      image.alt = photo.alt ?? `Photo ${index + 1}`;
+      caption.textContent = photo.alt ?? '';
+      current.textContent = String(index + 1);
+    };
+    document.querySelectorAll<HTMLElement>('[data-photo]').forEach((button) => button.addEventListener('click', () => {
+      show(Number(button.dataset.photo));
+      dialog.showModal();
+    }));
+    dialog.querySelectorAll<HTMLElement>('[data-step]').forEach((button) => button.addEventListener('click', () => show(index + Number(button.dataset.step))));
+    dialog.querySelector('[data-close]')?.addEventListener('click', () => dialog.close());
+    dialog.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowLeft') show(index - 1);
+      if (event.key === 'ArrowRight') show(index + 1);
+    });
+    dialog.addEventListener('touchstart', (event) => { touchX = event.changedTouches[0]?.clientX ?? 0; }, { passive: true });
+    dialog.addEventListener('touchend', (event) => {
+      const distance = (event.changedTouches[0]?.clientX ?? 0) - touchX;
+      if (Math.abs(distance) > 50) show(index + (distance < 0 ? 1 : -1));
+    }, { passive: true });
+  }
+</script>

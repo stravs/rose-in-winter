@@ -1,0 +1,186 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import SiteHeader from '../components/site/SiteHeader.astro';
+import EnquiryForm from '../components/site/EnquiryForm.astro';
+import SiteFooter from '../components/site/SiteFooter.astro';
+import { propertyMetaDescription, propertyLocation, unitFacts } from '../domain/property';
+import { propertyRepository } from '../repositories/property-repository';
+import { unitPath } from '../domain/unit-path';
+
+const property = await propertyRepository.get();
+if (!property?.narrative) throw new Error('Homepage needs .data/property.json with narrative');
+const story = property.narrative;
+const rating = property.bookingRating;
+const hero = property.photos[0];
+const [heroLine1, heroLine2] = story.heroTitle.split('\n');
+// Hero art: a painting of the house (supplied editorial asset), not a photo. The photo stays the social/JSON-LD image.
+const painting = {
+  url: '/images/rose-in-winter/hero-sunlit.webp',
+  srcSet: '/images/rose-in-winter/hero-sunlit-small.webp 800w, /images/rose-in-winter/hero-sunlit.webp 1448w',
+  width: 1448, height: 1086,
+  alt: 'Impressionist painting of the apartment house and garden in sunlight',
+};
+const allPhotos = [...property.photos, ...property.units.flatMap((unit) => unit.photos)];
+const housePhoto = allPhotos.find((photo) => photo.url === story.housePhotos?.[0]);
+const hasCoordinates = property.latitude !== undefined && property.longitude !== undefined;
+const coordinates = hasCoordinates ? `${property.latitude},${property.longitude}` : propertyLocation(property);
+const mapEmbed = `https://www.google.com/maps?q=${encodeURIComponent(coordinates)}&z=15&hl=en&output=embed`;
+const mapLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(coordinates)}`;
+
+const canonical = new URL('/', Astro.site ?? Astro.url.origin).href;
+const jsonLd = {
+  '@context': 'https://schema.org', '@type': 'LodgingBusiness', name: property.name,
+  description: property.description, url: canonical, image: allPhotos.map((photo) => new URL(photo.url, canonical).href),
+  address: { '@type': 'PostalAddress', streetAddress: property.address, addressLocality: property.city, addressCountry: property.country },
+  geo: hasCoordinates ? { '@type': 'GeoCoordinates', latitude: property.latitude, longitude: property.longitude } : undefined,
+  checkinTime: '15:00', checkoutTime: '10:30', sameAs: property.bookingUrl,
+};
+---
+<SiteLayout title={`${property.name} | ${property.city}`} description={propertyMetaDescription(property)} {canonical} image={hero?.url} {jsonLd}>
+  <section class="relative">
+    <div class="relative h-[62vh] min-h-[420px] lg:h-svh lg:min-h-[560px] bg-dark text-white">
+      <img src={painting.url} srcset={painting.srcSet} sizes="100vw" width={painting.width} height={painting.height} alt={painting.alt} fetchpriority="high" class="absolute inset-0 w-full h-full object-cover object-center" />
+      <SiteHeader {property} overlay />
+    </div>
+    <div id="main" class="relative -mt-24 lg:absolute lg:inset-x-0 lg:bottom-12 lg:mt-0">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6">
+        <div class="max-w-[36rem] bg-bg rounded-2xl p-6 sm:p-10 shadow-2xl shadow-dark/30">
+          {story.heroEyebrow && <p class="text-sm font-semibold uppercase tracking-[.14em] text-muted">{story.heroEyebrow}</p>}
+          <h1 class="font-serif text-4xl sm:text-5xl leading-[1.04] mt-4">{heroLine1}{heroLine2 && <><br /><em>{heroLine2}</em></>}</h1>
+          <p class="mt-5 text-lg text-muted">{story.heroText}</p>
+          <div class="mt-7 flex flex-wrap gap-3">
+            <a href="#enquiry" class="btn-primary">Send enquiry</a>
+            <a href="#apartments" class="btn-secondary">See the apartments</a>
+          </div>
+          {rating && (
+            <a href="#reviews" class="mt-7 flex items-center gap-4 border-t border-ink/10 pt-5">
+              <span class="font-serif text-4xl leading-none">{rating.value.toFixed(1)}</span>
+              <span class="text-sm text-muted">
+                {story.heroQuote && <><span class="font-serif italic text-lg text-ink">“{story.heroQuote.quote}”</span> <span class="whitespace-nowrap">{` — ${story.heroQuote.author}`}</span><br /></>}
+                <strong class="text-ink">{rating.label}</strong> · {rating.count} Booking.com reviews
+              </span>
+            </a>
+          )}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:grid lg:grid-cols-[1fr_360px] lg:gap-16">
+    <div class="min-w-0">
+      <section class="py-20" aria-labelledby="house-title">
+        <h2 id="house-title" class="font-serif text-4xl sm:text-5xl">{story.introTitle}</h2>
+        <p class="mt-4 text-lg text-muted max-w-2xl">{story.introText}</p>
+        <div class:list={['mt-10 grid gap-8 sm:gap-10 items-center', housePhoto && 'sm:grid-cols-2']}>
+          {housePhoto && (
+            <figure>
+              <img src={housePhoto.url} srcset={housePhoto.srcSet} sizes="(max-width: 640px) 92vw, 420px" width={housePhoto.width} height={housePhoto.height} alt={housePhoto.alt} loading="lazy" decoding="async" class="w-full aspect-[4/5] object-cover rounded-2xl bg-soft" />
+              {housePhoto.alt && <figcaption class="mt-3 text-sm text-muted">{housePhoto.alt}</figcaption>}
+            </figure>
+          )}
+          {story.highlights && (
+            <ul class="grid sm:grid-cols-2 gap-x-10 gap-y-8">
+              {story.highlights.map((item) => <li class="border-t border-ink/20 pt-5"><strong class="block font-serif text-3xl font-normal">{item.title}</strong><span class="mt-2 block text-muted">{item.text}</span></li>)}
+            </ul>
+          )}
+        </div>
+        <figure id="host" class="mt-14 bg-soft rounded-2xl p-8 sm:p-10 scroll-mt-6">
+          {story.hostQuote && <blockquote class="font-serif text-3xl sm:text-4xl leading-tight">“{story.hostQuote}”</blockquote>}
+          <figcaption class="mt-5 text-muted max-w-2xl">
+            {story.hostText}
+            {property.host && <> {property.host.name} speaks {property.host.languages.slice(0, -1).join(', ')} and {property.host.languages.at(-1)}.</>}
+          </figcaption>
+        </figure>
+      </section>
+
+      <section id="apartments" class="pb-20 scroll-mt-6" aria-labelledby="apartments-title">
+        <h2 id="apartments-title" class="font-serif text-4xl sm:text-5xl">The apartments</h2>
+        <p class="mt-4 text-lg text-muted">All with a kitchen, seating area, TV and free Wi-Fi. For adults and children over 12.</p>
+        <div class="mt-8 divide-y divide-ink/10 border-y border-ink/10">
+          {property.units.map((unit) => {
+            const cover = unit.photos[0];
+            return (
+              <article class="py-8 grid sm:grid-cols-[220px_1fr] gap-5 sm:gap-8 items-center">
+                <a href={unitPath(unit, 'en')} tabindex="-1" aria-hidden="true">
+                  {cover && <img src={cover.url} srcset={cover.srcSet} sizes="(max-width: 640px) 92vw, 220px" width={cover.width} height={cover.height} alt="" loading="lazy" decoding="async" class="w-full aspect-[4/3] object-cover rounded-2xl bg-soft" />}
+                </a>
+                <div>
+                  <h3 class="font-serif text-2xl sm:text-3xl"><a href={unitPath(unit, 'en')} class="hover:text-accent">{unit.name}</a></h3>
+                  <p class="mt-2 text-muted">{unitFacts(unit)}</p>
+                  <p class="mt-5"><a href={unitPath(unit, 'en')} class="link">{unit.photos.length} photos and details</a></p>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+      </section>
+    </div>
+
+    <EnquiryForm {property} class="lg:sticky lg:top-6 lg:mt-20 mb-20" />
+  </div>
+
+  {rating && (
+    <section id="reviews" class="bg-soft scroll-mt-6" aria-labelledby="reviews-title">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 py-20">
+        <div class="flex flex-wrap items-end justify-between gap-8">
+          <div>
+            <h2 id="reviews-title" class="font-serif text-4xl sm:text-5xl">What guests say</h2>
+            <p class="mt-3 text-muted">Reviews and scores from guests who booked on Booking.com.</p>
+          </div>
+          <dl class="flex flex-wrap gap-x-10 gap-y-4 text-sm text-muted">
+            <div class="flex flex-col-reverse"><dt>Booking.com · {rating.count} reviews</dt><dd class="font-serif text-5xl text-ink">{rating.value.toFixed(1)}</dd></div>
+            {rating.categories.map((category) => <div class="flex flex-col-reverse"><dt>{category.label}</dt><dd class="font-serif text-5xl text-ink">{category.value.toFixed(1)}</dd></div>)}
+          </dl>
+        </div>
+        {property.testimonials && (
+          <div class="mt-12 flex gap-5 overflow-x-auto snap-x snap-mandatory pb-4 -mx-4 px-4 sm:mx-0 sm:px-0 lg:block lg:columns-3 lg:gap-5 lg:overflow-visible lg:pb-0" tabindex="0" aria-label="Guest reviews">
+            {property.testimonials.map((review) => (
+              <figure class="snap-start shrink-0 w-[85%] sm:w-[420px] lg:w-auto lg:mb-5 lg:break-inside-avoid bg-bg rounded-2xl p-7">
+                <blockquote class="font-serif text-xl leading-snug">“{review.quote}”</blockquote>
+                <figcaption class="mt-5 text-sm text-muted">{[review.author, review.country].filter(Boolean).join(' · ')}</figcaption>
+              </figure>
+            ))}
+          </div>
+        )}
+        <a href={rating.url} target="_blank" rel="noopener noreferrer" class="mt-6 inline-block link">Read all {rating.count} reviews on Booking.com ↗</a>
+      </div>
+    </section>
+  )}
+
+  <section id="location" class="scroll-mt-6" aria-labelledby="location-title">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 py-20 grid lg:grid-cols-2 gap-12">
+      <div>
+        <h2 id="location-title" class="font-serif text-4xl sm:text-5xl">From the garden gate</h2>
+        <p class="mt-4 text-lg text-muted">{propertyLocation(property, { country: false })}. {story.locationText}</p>
+        {property.nearby && (
+          <ol class="mt-10 relative border-l-2 border-ink/15 ml-2 space-y-7">
+            <li class="pl-7 relative"><span class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-ink"></span><strong>{property.name.replace(/^Apartments /, '')}</strong><br /><span class="text-muted">Garden, creek, free parking</span></li>
+            {property.nearby.map((place) => (
+              <li class="pl-7 relative">
+                <span class="absolute -left-[7px] top-2 w-3 h-3 rounded-full bg-bg border-2 border-ink/40"></span>
+                {place.major ? <strong>{place.name}</strong> : place.name} <span class="text-muted">· {place.distance}</span>
+                {place.note && <><br /><span class="text-muted">{place.note}</span></>}
+              </li>
+            ))}
+          </ol>
+        )}
+        <p class="mt-8 text-sm text-muted">Distances are approximate.</p>
+      </div>
+      <div class="flex flex-col gap-4">
+        <iframe class="w-full grow min-h-96 rounded-2xl border-0 bg-soft" src={mapEmbed} title={`Map showing ${property.name}, ${property.city}`} loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <a class="link self-start" href={mapLink} target="_blank" rel="noopener noreferrer">Directions in Google Maps ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="arrival" class="bg-soft scroll-mt-6" aria-labelledby="arrival-title">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 py-20">
+      <h2 id="arrival-title" class="font-serif text-4xl sm:text-5xl">Good to know</h2>
+      <dl class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-8">
+        {story.practical.map((item) => <div><dt class="font-serif text-2xl">{item.label}</dt><dd class="mt-2 text-muted">{item.value}</dd></div>)}
+      </dl>
+    </div>
+  </section>
+
+  <SiteFooter {property} />
+</SiteLayout>

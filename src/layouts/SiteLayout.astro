@@ -1,0 +1,45 @@
+---
+// Site layout: Tailwind only. BaseLayout's unlayered global.css would override Tailwind utilities.
+import '../styles/site.css';
+import { getSiteConfig } from '../config/site';
+
+interface Props {
+  title: string;
+  description: string;
+  canonical: string;
+  image?: string | undefined;
+  jsonLd?: Record<string, unknown> | undefined;
+}
+
+const { title, description, canonical, image, jsonLd } = Astro.props;
+const siteConfig = await getSiteConfig();
+// design.colors overrides the @theme defaults in site.css.
+const c = siteConfig.design.colors;
+const palette = `--color-dark:${c.primary};--color-accent:${c.accent};--color-bg:${c.background};--color-soft:${c.surface};--color-ink:${c.text};--color-muted:${c.muted}`;
+---
+<!doctype html>
+<html lang="en" style={palette}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="preload" href="/fonts/newsreader.woff2" as="font" type="font/woff2" crossorigin />
+    <meta name="theme-color" content={c.primary} />
+    {siteConfig.site.preview && <meta name="robots" content="noindex,nofollow" />}
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    {image && <meta property="og:image" content={new URL(image, canonical).href} />}
+    <meta name="twitter:card" content="summary_large_image" />
+    {jsonLd && <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+  </head>
+  <body class="bg-bg text-ink font-sans antialiased">
+    <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:bg-ink focus:text-bg focus:px-4 focus:py-2 focus:rounded-full">Skip to content</a>
+    <slot />
+  </body>
+</html>

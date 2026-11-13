@@ -1,0 +1,10 @@
+---
+import type { Property } from '../../domain/property';
+// Rose mark: svgrepo.com/svg/21894/rose (Blossoms collection), CC0.
+import Rose from '../../assets/rose.svg';
+interface Props { property: Property }
+const { property } = Astro.props;
+// Title case, small words lowercase: "Rose in winter" → "Rose in Winter".
+const brand = property.name.replace(/^Apartments /, '').replace(/\b(?!(?:in|of|the|and|at|on)\b)\p{Ll}/gu, (c) => c.toUpperCase());
+---
+<a href="/" class="inline-flex items-center gap-3 font-serif text-3xl font-medium tracking-tight"><Rose class="size-8 shrink-0 -translate-y-[0.1em]" aria-hidden="true" />{brand}</a>

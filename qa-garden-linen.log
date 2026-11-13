@@ -1,0 +1,122 @@
+{
+  "status": "passed",
+  "url": "http://localhost:4325",
+  "viewports": [
+    {
+      "width": 390,
+      "horizontalOverflow": false,
+      "brokenImages": [],
+      "pageErrors": [],
+      "httpFailures": [],
+      "galleries": [
+        {
+          "roomId": "120264301",
+          "photos": 14,
+          "keyboardAndFocus": "passed"
+        },
+        {
+          "roomId": "120264302",
+          "photos": 10,
+          "keyboardAndFocus": "passed"
+        },
+        {
+          "roomId": "120264303",
+          "photos": 10,
+          "keyboardAndFocus": "passed"
+        },
+        {
+          "roomId": "120264304",
+          "photos": 11,
+          "keyboardAndFocus": "passed"
+        },
+        {
+          "roomId": "120264305",
+          "photos": 12,
+          "keyboardAndFocus": "passed"
+        }
+      ]
+    },
+    {
+      "width": 768,
+      "horizontalOverflow": false,
+      "brokenImages": [],
+      "pageErrors": [],
+      "httpFailures": [],
+      "galleries": [
+        {
+          "roomId": "120264301",
+          "photos": 14,
+          "keyboardAndFocus": "passed"
+        },
+        {
+          "roomId": "120264302",
+          "photos": 10,
+          "keyboardAndFocus": "passed"
+        },
+        {
+          "roomId": "120264303",
+          "photos": 10,
+          "keyboardAndFocus": "passed"
+        },
+        {
+          "roomId": "120264304",
+          "photos": 11,
+          "keyboardAndFocus": "passed"
+        },
+        {
+          "roomId": "120264305",
+          "photos": 12,
+          "keyboardAndFocus": "passed"
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "horizontalOverflow": false,
+      "brokenImages": [],
+      "pageErrors": [],
+      "httpFailures": [],
+      "galleries": [
+        {
+          "roomId": "120264301",
+          "photos": 14,
+          "keyboardAndFocus": "passed"
+        },
+        {
+          "roomId": "120264302",
+          "photos": 10,
+          "keyboardAndFocus": "passed"
+        },
+        {
+          "roomId": "120264303",
+          "photos": 10,
+          "keyboardAndFocus": "passed"
+        },
+        {
+          "roomId": "120264304",
+          "photos": 11,
+          "keyboardAndFocus": "passed"
+        },
+        {
+          "roomId": "120264305",
+          "photos": 12,
+          "keyboardAndFocus": "passed"
+        }
+      ]
+    }
+  ],
+  "contrastRatios": {
+    "text/background": 12.83,
+    "text/surface": 11.47,
+    "muted/background": 5.32,
+    "muted/surface": 4.76,
+    "accent/background": 7.71,
+    "accent/surface": 6.9,
+    "light/primary": 7.71
+  },
+  "limitations": [
+    "Not a complete accessibility audit.",
+    "External Booking availability/maps not tested.",
+    "Private preview; photo rights and facts need owner approval."
+  ]
+}

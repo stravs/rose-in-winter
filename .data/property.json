@@ -1,0 +1,720 @@
+{
+  "description": "Self-catering apartments in a garden with a stream, a kilometre from Lake Bled. Meet your host Barbara and find a one- or two-bedroom space for your stay.",
+  "address": "Za potokom 1, 4260 Bled",
+  "city": "Bled",
+  "country": "Slovenia",
+  "amenities": [
+    "Garden by a stream",
+    "Your own kitchen",
+    "Free private parking",
+    "Free Wi-Fi"
+  ],
+  "checkIn": "15:00–19:00",
+  "checkOut": "10:00–10:30",
+  "name": "Apartments Rose in winter",
+  "units": [
+    {
+      "id": "booking-room-120264301",
+      "bookingRoomId": "120264301",
+      "name": "Two-Bedroom Apartment",
+      "description": "This apartment features a seating area with a TV and a fully equipped kitchen.",
+      "areaSquareMetres": 60,
+      "occupancyLabel": "4 adults",
+      "occupancy": {
+        "maxPersons": 4,
+        "maxChildren": 0,
+        "maxGuests": 4
+      },
+      "rooms": [
+        {
+          "name": "Beds",
+          "beds": "1 extra-large double bed · 1 extra-large double bed"
+        }
+      ],
+      "amenities": [
+        "Kitchen",
+        "Private entrance",
+        "Heating",
+        "Hairdryer"
+      ],
+      "photos": [
+        {
+          "url": "/images/rose-in-winter/761047603.webp",
+          "srcSet": "/images/rose-in-winter/761047603-small.webp 600w, /images/rose-in-winter/761047603-medium.webp 1024w, /images/rose-in-winter/761047603-large.webp 1920w, /images/rose-in-winter/761047603.webp 2560w",
+          "width": 2560,
+          "height": 1920,
+          "alt": "Living and dining area in the two-bedroom apartment"
+        },
+        {
+          "url": "/images/rose-in-winter/456665399.webp",
+          "srcSet": "/images/rose-in-winter/456665399-small.webp 600w, /images/rose-in-winter/456665399-medium.webp 1024w, /images/rose-in-winter/456665399-large.webp 1920w, /images/rose-in-winter/456665399.webp 2560w",
+          "width": 2560,
+          "height": 1920,
+          "alt": "a bedroom with a black bed with two green chairs at Apartments Rose in winter in Bled"
+        },
+        {
+          "url": "/images/rose-in-winter/761046560.webp",
+          "srcSet": "/images/rose-in-winter/761046560-small.webp 600w, /images/rose-in-winter/761046560-medium.webp 1024w, /images/rose-in-winter/761046560-large.webp 1920w, /images/rose-in-winter/761046560.webp 2250w",
+          "width": 2250,
+          "height": 3000,
+          "alt": "a bathroom with a sink and a toilet and a mirror at Apartments Rose in winter in Bled"
+        },
+        {
+          "url": "/images/rose-in-winter/38355116.webp",
+          "srcSet": "/images/rose-in-winter/38355116-small.webp 600w, /images/rose-in-winter/38355116-medium.webp 1024w, /images/rose-in-winter/38355116-large.webp 1920w, /images/rose-in-winter/38355116.webp 2402w",
+          "width": 2402,
+          "height": 1600,
+          "alt": "a kitchen with a table with chairs and a bottle of wine at Apartments Rose in winter in Bled"
+        },
+        {
+          "url": "/images/rose-in-winter/456665144.webp",
+          "srcSet": "/images/rose-in-winter/456665144-small.webp 600w, /images/rose-in-winter/456665144-medium.webp 1024w, /images/rose-in-winter/456665144-large.webp 1920w, /images/rose-in-winter/456665144.webp 2560w",
+          "width": 2560,
+          "height": 1920,
+          "alt": "a bedroom with a bed and a ceiling fan at Apartments Rose in winter in Bled"
+        },
+        {
+          "url": "/images/rose-in-winter/456665365.webp",
+          "srcSet": "/images/rose-in-winter/456665365-small.webp 600w, /images/rose-in-winter/456665365-medium.webp 1024w, /images/rose-in-winter/456665365-large.webp 1920w, /images/rose-in-winter/456665365.webp 2560w",
+          "width": 2560,
+          "height": 1920,
+          "alt": "a small bedroom with a bed with green chairs at Apartments Rose in winter in Bled"
+        },
+        {
+          "url": "/images/rose-in-winter/456665380.webp",
+          "srcSet": "/images/rose-in-winter/456665380-small.webp 600w, /images/rose-in-winter/456665380-medium.webp 1024w, /images/rose-in-winter/456665380-large.webp 1920w, /images/rose-in-winter/456665380.webp 2560w",
+          "width": 2560,
+          "height": 1920,
+          "alt": "a kitchen and dining room with a table and chairs at Apartments Rose in winter in Bled"
+        },
+        {
+          "url": "/images/rose-in-winter/710580470.webp",
+          "srcSet": "/images/rose-in-winter/710580470-small.webp 600w, /images/rose-in-winter/710580470-medium.webp 1024w, /images/rose-in-winter/710580470-large.webp 1920w, /images/rose-in-winter/710580470.webp 2560w",
+          "width": 2560,
+          "height": 1920,
+          "alt": "a kitchen and living room with a table and chairs at Apartments Rose in winter in Bled"
+        },
+        {
+          "url": "/images/rose-in-winter/761046482.webp",
+          "srcSet": "/images/rose-in-winter/761046482-small.webp 600w, /images/rose-in-winter/761046482-medium.webp 1024w, /images/rose-in-winter/761046482-large.webp 1920w, /images/rose-in-winter/761046482.webp 2250w",
+          "width": 2250,
+          "height": 3000,
+          "alt": "a shower with a glass door and a green rug at Apartments Rose in winter in Bled"
+        },
+        {
+          "url": "/images/rose-in-winter/761046516.webp",
+          "srcSet": "/images/rose-in-winter/761046516-small.webp 600w, /images/rose-in-winter/761046516-medium.webp 1024w, /images/rose-in-winter/761046516-large.webp 1920w, /images/rose-in-winter/761046516.webp 2560w",
+          "width": 2560,
+          "height": 1920,
+          "alt": "a bathroom with a sink and a toilet at Apartments Rose in winter in Bled"
+        },
+        {
+          "url": "/images/rose-in-winter/761047176.webp",
+          "srcSet": "/images/rose-in-winter/761047176-small.webp 600w, /images/rose-in-winter/761047176-medium.webp 1024w, /images/rose-in-winter/761047176-large.webp 1920w, /images/rose-in-winter/761047176.webp 2560w",
+          "width": 2560,
+          "height": 1920,
+          "alt": "a bedroom with a black bed with two green chairs at Apartments Rose in winter in Bled"
+        },
+        {
+          "url": "/images/rose-in-winter/761047250.webp",
+          "srcSet": "/images/rose-in-winter/761047250-small.webp 600w, /images/rose-in-winter/761047250-medium.webp 1024w, /images/rose-in-winter/761047250-large.webp 1920w, /images/rose-in-winter/761047250.webp 2560w",
+          "width": 2560,
+          "height": 1920,
+          "alt": "a bedroom with a black bed and a ceiling fan at Apartments Rose in winter in Bled"
+        },
+        {
+          "url": "/images/rose-in-winter/761047688.webp",
+          "srcSet": "/images/rose-in-winter/761047688-small.webp 600w, /images/rose-in-winter/761047688-medium.webp 1024w, /images/rose-in-winter/761047688-large.webp 1920w, /images/rose-in-winter/761047688.webp 2560w",
+          "width": 2560,
+          "height": 1920,
+          "alt": "a dining room with a table and a television on the wall at Apartments Rose in winter in Bled"
+        },
+        {
+          "url": "/images/rose-in-winter/761047725.webp",
+          "srcSet": "/images/rose-in-winter/761047725-small.webp 600w, /images/rose-in-winter/761047725-medium.webp 1024w, /images/rose-in-winter/761047725-large.webp 1920w, /images/rose-in-winter/761047725.webp 2560w",
+          "width": 2560,
+          "height": 1920,
+          "alt": "a black bed with two green towels on it at Apartments Rose in winter in Bled"
+        }
+      ],
+      "bookingUrl": "https://www.booking.com/hotel/si/apartments-rose-in-winter.en-gb.html"
+    },
+    {
+      "id": "booking-room-120264302",
+      "bookingRoomId": "120264302",
+      "name": "Two-Bedroom Apartment with Garden View",
+      "description": "This apartment features a seating area with a TV and a fully equipped kitchen.",
+      "areaSquareMetres": 60,
+      "occupancyLabel": "4 adults",
+      "occupancy": {
+        "maxPersons": 4,
+        "maxChildren": 0,
+        "maxGuests": 4
+      },
+      "rooms": [
+        {
+          "name": "Beds",
+          "beds": "1 extra-large double bed · 2 single beds"
+        }
+      ],
+      "amenities": [
+        "Kitchen",
+        "Private entrance",
+        "Heating",
+        "Hairdryer"
+      ],
+      "photos": [
+        {
+          "url": "/images/rose-in-winter/456666304.webp",
+          "srcSet": "/images/rose-in-winter/456666304-small.webp 600w, /images/rose-in-winter/456666304-medium.webp 1024w, /images/rose-in-winter/456666304-large.webp 1920w, /images/rose-in-winter/456666304.webp 2560w",
+          "width": 2560,
+          "height": 1920,
+          "alt": "Sitting and dining area in the two-bedroom apartment with garden view"
+        },
+        {
+          "url": "/images/rose-in-winter/38355105.webp",
+          "srcSet": "/images/rose-in-winter/38355105-small.webp 600w, /images/rose-in-winter/38355105-medium.webp 1024w, /images/rose-in-winter/38355105.webp 1277w",
+          "width": 1277,
+          "height": 1919,
+          "alt": "a bedroom with a bed with a green blanket on it at Apartments Rose in winter in Bled"
+        },
+        {
+          "url": "/images/rose-in-winter/38355122.webp",
+          "srcSet": "/images/rose-in-winter/38355122-small.webp 600w, /images/rose-in-winter/38355122-medium.webp 1024w, /images/rose-in-winter/38355122-large.webp 1919w, /images/rose-in-winter/38355122.webp 2405w",
+          "width": 2405,
+          "height": 1600,
+          "alt": "a room with two beds and a window at Apartments Rose in winter in Bled"
+        },
+        {
+          "url": "/images/rose-in-winter/38355138.webp",
+          "srcSet": "/images/rose-in-winter/38355138-small.webp 600w, /images/rose-in-winter/38355138-medium.webp 1024w, /images/rose-in-winter/38355138-large.webp 1919w, /images/rose-in-winter/38355138.webp 2405w",
+          "width": 2405,
+          "height": 1600,
+          "alt": "a living room with a couch and a table at Apartments Rose in winter in Bled"
+        },
+        {
+          "url": "/images/rose-in-winter/38355136.webp",
+          "srcSet": "/images/rose-in-winter/38355136-small.webp 600w, /images/rose-in-winter/38355136-medium.webp 1024w, /images/rose-in-winter/38355136-large.webp 1919w, /images/rose-in-winter/38355136.webp 2405w",
+          "width": 2405,
+          "height": 1600,
+          "alt": "a living room with a couch and a table with a green table at Apartments Rose in winter in Bled"
+        },
+        {
+          "url": "/images/rose-in-winter/38355128.webp",
+          "srcSet": "/images/rose-in-winter/38355128-small.webp 600w, /images/rose-in-winter/38355128-medium.webp 1024w, /images/rose-in-winter/38355128-large.webp 1919w, /images/rose-in-winter/38355128.webp 2405w",
+          "width": 2405,
+          "height": 1600,
+          "alt": "a television and a vase with a plant on a dresser at Apartments Rose in winter in Bled"
+        },
+        {
+          "url": "/images/rose-in-winter/38355110.webp",
+          "srcSet": "/images/rose-in-winter/38355110-small.webp 600w, /images/rose-in-winter/38355110-medium.webp 1024w, /images/rose-in-winter/38355110-large.webp 1919w, /images/rose-in-winter/38355110.webp 2405w",
+          "width": 2405,
+          "height": 1600,
+          "alt": "a bathroom with a sink and a shower and a toilet at Apartments Rose in winter in Bled"
+        },
+        {
+          "url": "/images/rose-in-winter/456666318.webp",
+          "srcSet": "/images/rose-in-winter/456666318-small.webp 600w, /images/rose-in-winter/456666318-medium.webp 1024w, /images/rose-in-winter/456666318-large.webp 1920w, /images/rose-in-winter/456666318.webp 2560w",
+          "width": 2560,
+          "height": 1920,
+          "alt": "a kitchen with a glass table with a potted plant on it at Apartments Rose in winter in Bled"
+        },
+        {
+          "url": "/images/rose-in-winter/456666310.webp",
+          "srcSet": "/images/rose-in-winter/456666310-small.webp 600w, /images/rose-in-winter/456666310-medium.webp 1024w, /images/rose-in-winter/456666310-large.webp 1920w, /images/rose-in-winter/456666310.webp 2560w",
+          "width": 2560,
+          "height": 1920,
+          "alt": "a living room with a glass table and a kitchen at Apartments Rose in winter in Bled"
+        },
+        {
+          "url": "/images/rose-in-winter/456666338.webp",
+          "srcSet": "/images/rose-in-winter/456666338-small.webp 600w, /images/rose-in-winter/456666338-medium.webp 1024w, /images/rose-in-winter/456666338-large.webp 1920w, /images/rose-in-winter/456666338.webp 2560w",
+          "width": 2560,
+          "height": 1920,
+          "alt": "a living room with a couch and a table at Apartments Rose in winter in Bled"
+        }
+      ],
+      "bookingUrl": "https://www.booking.com/hotel/si/apartments-rose-in-winter.en-gb.html"
+    },
+    {
+      "id": "booking-room-120264303",
+      "bookingRoomId": "120264303",
+      "name": "One-Bedroom Apartment with Balcony",
+      "description": "This apartment features a seating area with a TV and a fully equipped kitchen.",
+      "areaSquareMetres": 40,
+      "occupancyLabel": "2 adults",
+      "occupancy": {
+        "maxPersons": 2,
+        "maxChildren": 0,
+        "maxGuests": 2
+      },
+      "rooms": [
+        {
+          "name": "Beds",
+          "beds": "1 large double bed"
+        }
+      ],
+      "amenities": [
+        "Kitchen",
+        "Private entrance",
+        "Heating",
+        "Hairdryer"
+      ],
+      "photos": [
+        {
+          "url": "/images/rose-in-winter/456668124.webp",
+          "srcSet": "/images/rose-in-winter/456668124-small.webp 600w, /images/rose-in-winter/456668124-medium.webp 1024w, /images/rose-in-winter/456668124-large.webp 1920w, /images/rose-in-winter/456668124.webp 2250w",
+          "width": 2250,
+          "height": 3000,
+          "alt": "Balcony with outdoor seating in the one-bedroom apartment with balcony"
+        },
+        {
+          "url": "/images/rose-in-winter/710568430.webp",
+          "srcSet": "/images/rose-in-winter/710568430-small.webp 600w, /images/rose-in-winter/710568430.webp 1024w",
+          "width": 1024,
+          "height": 768,
+          "alt": "a kitchen with a counter and stools in a room at Apartments Rose in winter in Bled"
+        },
+        {
+          "url": "/images/rose-in-winter/710568985.webp",
+          "srcSet": "/images/rose-in-winter/710568985-small.webp 600w, /images/rose-in-winter/710568985-medium.webp 1024w, /images/rose-in-winter/710568985-large.webp 1920w, /images/rose-in-winter/710568985.webp 2560w",
+          "width": 2560,
+          "height": 1920,
+          "alt": "a bedroom with a bed and two pictures on the wall at Apartments Rose in winter in Bled"
+        },
+        {
+          "url": "/images/rose-in-winter/456667212.webp",
+          "srcSet": "/images/rose-in-winter/456667212-small.webp 600w, /images/rose-in-winter/456667212-medium.webp 1024w, /images/rose-in-winter/456667212-large.webp 1920w, /images/rose-in-winter/456667212.webp 2250w",
+          "width": 2250,
+          "height": 3000,
+          "alt": "a bathroom with a shower and a toilet and a sink at Apartments Rose in winter in Bled"
+        },
+        {
+          "url": "/images/rose-in-winter/456667220.webp",
+          "srcSet": "/images/rose-in-winter/456667220-small.webp 600w, /images/rose-in-winter/456667220-medium.webp 1024w, /images/rose-in-winter/456667220-large.webp 1920w, /images/rose-in-winter/456667220.webp 2560w",
+          "width": 2560,
+          "height": 1920,
+          "alt": "a kitchen with a sink and a kitchen with a couch at Apartments Rose in winter in Bled"
+        },
+        {
+          "url": "/images/rose-in-winter/456667233.webp",
+          "srcSet": "/images/rose-in-winter/456667233-small.webp 600w, /images/rose-in-winter/456667233-medium.webp 1024w, /images/rose-in-winter/456667233-large.webp 1920w, /images/rose-in-winter/456667233.webp 2560w",
+          "width": 2560,
+          "height": 1920,
+          "alt": "a kitchen with a black counter top in a room at Apartments Rose in winter in Bled"
+        },
+        {
+          "url": "/images/rose-in-winter/38355146.webp",
+          "srcSet": "/images/rose-in-winter/38355146-small.webp 600w, /images/rose-in-winter/38355146-medium.webp 1024w, /images/rose-in-winter/38355146-large.webp 1920w, /images/rose-in-winter/38355146.webp 2402w",
+          "width": 2402,
+          "height": 1600,
+          "alt": "a bathroom with a toilet and a sink at Apartments Rose in winter in Bled"
+        },
+        {
+          "url": "/images/rose-in-winter/456667248.webp",
+          "srcSet": "/images/rose-in-winter/456667248-small.webp 600w, /images/rose-in-winter/456667248-medium.webp 1024w, /images/rose-in-winter/456667248-large.webp 1920w, /images/rose-in-winter/456667248.webp 2560w",
+          "width": 2560,
+          "height": 1920,
+          "alt": "a kitchen and living room with a counter and a table at Apartments Rose in winter in Bled"
+        },
+        {
+          "url": "/images/rose-in-winter/710568512.webp",
+          "srcSet": "/images/rose-in-winter/710568512-small.webp 600w, /images/rose-in-winter/710568512.webp 1024w",
+          "width": 1024,
+          "height": 768,
+          "alt": "a kitchen with a sink and a living room with a couch at Apartments Rose in winter in Bled"
+        },
+        {
+          "url": "/images/rose-in-winter/710569023.webp",
+          "srcSet": "/images/rose-in-winter/710569023-small.webp 600w, /images/rose-in-winter/710569023-medium.webp 1024w, /images/rose-in-winter/710569023-large.webp 1920w, /images/rose-in-winter/710569023.webp 2560w",
+          "width": 2560,
+          "height": 1920,
+          "alt": "a bedroom with a bed and a room with a kitchen at Apartments Rose in winter in Bled"
+        }
+      ],
+      "bookingUrl": "https://www.booking.com/hotel/si/apartments-rose-in-winter.en-gb.html"
+    },
+    {
+      "id": "booking-room-120264304",
+      "bookingRoomId": "120264304",
+      "name": "One-Bedroom Apartment",
+      "description": "This apartment features a seating area with a TV and a fully equipped kitchen.",
+      "areaSquareMetres": 40,
+      "occupancyLabel": "2 adults",
+      "occupancy": {
+        "maxPersons": 2,
+        "maxChildren": 0,
+        "maxGuests": 2
+      },
+      "rooms": [
+        {
+          "name": "Beds",
+          "beds": "1 large double bed"
+        }
+      ],
+      "amenities": [
+        "Kitchen",
+        "Private entrance",
+        "Heating",
+        "Hairdryer"
+      ],
+      "photos": [
+        {
+          "url": "/images/rose-in-winter/710579014.webp",
+          "srcSet": "/images/rose-in-winter/710579014-small.webp 600w, /images/rose-in-winter/710579014-medium.webp 1024w, /images/rose-in-winter/710579014-large.webp 1920w, /images/rose-in-winter/710579014.webp 2560w",
+          "width": 2560,
+          "height": 1920,
+          "alt": "Living area in the one-bedroom apartment"
+        },
+        {
+          "url": "/images/rose-in-winter/710569023.webp",
+          "srcSet": "/images/rose-in-winter/710569023-small.webp 600w, /images/rose-in-winter/710569023-medium.webp 1024w, /images/rose-in-winter/710569023-large.webp 1920w, /images/rose-in-winter/710569023.webp 2560w",
+          "width": 2560,
+          "height": 1920,
+          "alt": "a bedroom with a bed and a room with a kitchen at Apartments Rose in winter in Bled"
+        },
+        {
+          "url": "/images/rose-in-winter/710579233.webp",
+          "srcSet": "/images/rose-in-winter/710579233-small.webp 600w, /images/rose-in-winter/710579233-medium.webp 1024w, /images/rose-in-winter/710579233-large.webp 1920w, /images/rose-in-winter/710579233.webp 2560w",
+          "width": 2560,
+          "height": 1920,
+          "alt": "a kitchen with a sink and a couch at Apartments Rose in winter in Bled"
+        },
+        {
+          "url": "/images/rose-in-winter/710568985.webp",
+          "srcSet": "/images/rose-in-winter/710568985-small.webp 600w, /images/rose-in-winter/710568985-medium.webp 1024w, /images/rose-in-winter/710568985-large.webp 1920w, /images/rose-in-winter/710568985.webp 2560w",
+          "width": 2560,
+          "height": 1920,
+          "alt": "a bedroom with a bed and two pictures on the wall at Apartments Rose in winter in Bled"
+        },
+        {
+          "url": "/images/rose-in-winter/38355146.webp",
+          "srcSet": "/images/rose-in-winter/38355146-small.webp 600w, /images/rose-in-winter/38355146-medium.webp 1024w, /images/rose-in-winter/38355146-large.webp 1920w, /images/rose-in-winter/38355146.webp 2402w",
+          "width": 2402,
+          "height": 1600,
+          "alt": "a bathroom with a toilet and a sink at Apartments Rose in winter in Bled"
+        },
+        {
+          "url": "/images/rose-in-winter/38355128.webp",
+          "srcSet": "/images/rose-in-winter/38355128-small.webp 600w, /images/rose-in-winter/38355128-medium.webp 1024w, /images/rose-in-winter/38355128-large.webp 1919w, /images/rose-in-winter/38355128.webp 2405w",
+          "width": 2405,
+          "height": 1600,
+          "alt": "a television and a vase with a plant on a dresser at Apartments Rose in winter in Bled"
+        },
+        {
+          "url": "/images/rose-in-winter/456667233.webp",
+          "srcSet": "/images/rose-in-winter/456667233-small.webp 600w, /images/rose-in-winter/456667233-medium.webp 1024w, /images/rose-in-winter/456667233-large.webp 1920w, /images/rose-in-winter/456667233.webp 2560w",
+          "width": 2560,
+          "height": 1920,
+          "alt": "a kitchen with a black counter top in a room at Apartments Rose in winter in Bled"
+        },
+        {
+          "url": "/images/rose-in-winter/456667220.webp",
+          "srcSet": "/images/rose-in-winter/456667220-small.webp 600w, /images/rose-in-winter/456667220-medium.webp 1024w, /images/rose-in-winter/456667220-large.webp 1920w, /images/rose-in-winter/456667220.webp 2560w",
+          "width": 2560,
+          "height": 1920,
+          "alt": "a kitchen with a sink and a kitchen with a couch at Apartments Rose in winter in Bled"
+        },
+        {
+          "url": "/images/rose-in-winter/456667212.webp",
+          "srcSet": "/images/rose-in-winter/456667212-small.webp 600w, /images/rose-in-winter/456667212-medium.webp 1024w, /images/rose-in-winter/456667212-large.webp 1920w, /images/rose-in-winter/456667212.webp 2250w",
+          "width": 2250,
+          "height": 3000,
+          "alt": "a bathroom with a shower and a toilet and a sink at Apartments Rose in winter in Bled"
+        },
+        {
+          "url": "/images/rose-in-winter/710579585.webp",
+          "srcSet": "/images/rose-in-winter/710579585-small.webp 600w, /images/rose-in-winter/710579585-medium.webp 1024w, /images/rose-in-winter/710579585-large.webp 1920w, /images/rose-in-winter/710579585.webp 2560w",
+          "width": 2560,
+          "height": 1920,
+          "alt": "a kitchen with a counter and stools in a room at Apartments Rose in winter in Bled"
+        },
+        {
+          "url": "/images/rose-in-winter/710580086.webp",
+          "srcSet": "/images/rose-in-winter/710580086-small.webp 600w, /images/rose-in-winter/710580086-medium.webp 1024w, /images/rose-in-winter/710580086-large.webp 1920w, /images/rose-in-winter/710580086.webp 2250w",
+          "width": 2250,
+          "height": 3000,
+          "alt": "two park benches sitting on a brick patio at Apartments Rose in winter in Bled"
+        }
+      ],
+      "bookingUrl": "https://www.booking.com/hotel/si/apartments-rose-in-winter.en-gb.html"
+    },
+    {
+      "id": "booking-room-120264305",
+      "bookingRoomId": "120264305",
+      "name": "One-Bedroom Apartment - Ground Floor",
+      "description": "This apartment features a seating area with a TV and a fully equipped kitchen.",
+      "areaSquareMetres": 40,
+      "occupancyLabel": "2 adults",
+      "occupancy": {
+        "maxPersons": 2,
+        "maxChildren": 0,
+        "maxGuests": 2
+      },
+      "rooms": [
+        {
+          "name": "Beds",
+          "beds": "1 extra-large double bed"
+        }
+      ],
+      "amenities": [
+        "Kitchen",
+        "Private entrance",
+        "Heating",
+        "Hairdryer"
+      ],
+      "photos": [
+        {
+          "url": "/images/rose-in-winter/710574881.webp",
+          "srcSet": "/images/rose-in-winter/710574881-small.webp 600w, /images/rose-in-winter/710574881-medium.webp 1024w, /images/rose-in-winter/710574881-large.webp 1920w, /images/rose-in-winter/710574881.webp 2560w",
+          "width": 2560,
+          "height": 1920,
+          "alt": "Sitting area in the ground-floor one-bedroom apartment"
+        },
+        {
+          "url": "/images/rose-in-winter/38355147.webp",
+          "srcSet": "/images/rose-in-winter/38355147-small.webp 600w, /images/rose-in-winter/38355147-medium.webp 1024w, /images/rose-in-winter/38355147-large.webp 1920w, /images/rose-in-winter/38355147.webp 2402w",
+          "width": 2402,
+          "height": 1600,
+          "alt": "a bedroom with a bed and a table with a lamp at Apartments Rose in winter in Bled"
+        },
+        {
+          "url": "/images/rose-in-winter/710570392.webp",
+          "srcSet": "/images/rose-in-winter/710570392-small.webp 600w, /images/rose-in-winter/710570392-medium.webp 1024w, /images/rose-in-winter/710570392-large.webp 1920w, /images/rose-in-winter/710570392.webp 2250w",
+          "width": 2250,
+          "height": 3000,
+          "alt": "a kitchen with white cabinets and a sink and a window at Apartments Rose in winter in Bled"
+        },
+        {
+          "url": "/images/rose-in-winter/38355159.webp",
+          "srcSet": "/images/rose-in-winter/38355159-small.webp 600w, /images/rose-in-winter/38355159-medium.webp 1024w, /images/rose-in-winter/38355159.webp 1600w",
+          "width": 1600,
+          "height": 2402,
+          "alt": "a black table with a green table cloth on it at Apartments Rose in winter in Bled"
+        },
+        {
+          "url": "/images/rose-in-winter/38355178.webp",
+          "srcSet": "/images/rose-in-winter/38355178-small.webp 600w, /images/rose-in-winter/38355178-medium.webp 1024w, /images/rose-in-winter/38355178-large.webp 1920w, /images/rose-in-winter/38355178.webp 2402w",
+          "width": 2402,
+          "height": 1600,
+          "alt": "a living room with a table and a dining room at Apartments Rose in winter in Bled"
+        },
+        {
+          "url": "/images/rose-in-winter/38355128.webp",
+          "srcSet": "/images/rose-in-winter/38355128-small.webp 600w, /images/rose-in-winter/38355128-medium.webp 1024w, /images/rose-in-winter/38355128-large.webp 1919w, /images/rose-in-winter/38355128.webp 2405w",
+          "width": 2405,
+          "height": 1600,
+          "alt": "a television and a vase with a plant on a dresser at Apartments Rose in winter in Bled"
+        },
+        {
+          "url": "/images/rose-in-winter/710570430.webp",
+          "srcSet": "/images/rose-in-winter/710570430-small.webp 600w, /images/rose-in-winter/710570430-medium.webp 1024w, /images/rose-in-winter/710570430-large.webp 1920w, /images/rose-in-winter/710570430.webp 2560w",
+          "width": 2560,
+          "height": 1920,
+          "alt": "a living room with a couch and a kitchen at Apartments Rose in winter in Bled"
+        },
+        {
+          "url": "/images/rose-in-winter/710570476.webp",
+          "srcSet": "/images/rose-in-winter/710570476-small.webp 600w, /images/rose-in-winter/710570476-medium.webp 1024w, /images/rose-in-winter/710570476-large.webp 1920w, /images/rose-in-winter/710570476.webp 2560w",
+          "width": 2560,
+          "height": 1920,
+          "alt": "a living room with a couch and a table at Apartments Rose in winter in Bled"
+        },
+        {
+          "url": "/images/rose-in-winter/710574910.webp",
+          "srcSet": "/images/rose-in-winter/710574910-small.webp 600w, /images/rose-in-winter/710574910-medium.webp 1024w, /images/rose-in-winter/710574910-large.webp 1920w, /images/rose-in-winter/710574910.webp 2250w",
+          "width": 2250,
+          "height": 3000,
+          "alt": "a bathroom with a shower and a sink at Apartments Rose in winter in Bled"
+        },
+        {
+          "url": "/images/rose-in-winter/710575933.webp",
+          "srcSet": "/images/rose-in-winter/710575933-small.webp 600w, /images/rose-in-winter/710575933-medium.webp 1024w, /images/rose-in-winter/710575933-large.webp 1920w, /images/rose-in-winter/710575933.webp 2560w",
+          "width": 2560,
+          "height": 1920,
+          "alt": "a kitchen with a table and chairs in a room at Apartments Rose in winter in Bled"
+        },
+        {
+          "url": "/images/rose-in-winter/710580327.webp",
+          "srcSet": "/images/rose-in-winter/710580327-small.webp 600w, /images/rose-in-winter/710580327-medium.webp 1024w, /images/rose-in-winter/710580327-large.webp 1920w, /images/rose-in-winter/710580327.webp 2560w",
+          "width": 2560,
+          "height": 1920,
+          "alt": "a large bush with green leaves in a garden at Apartments Rose in winter in Bled"
+        },
+        {
+          "url": "/images/rose-in-winter/710583381.webp",
+          "srcSet": "/images/rose-in-winter/710583381-small.webp 600w, /images/rose-in-winter/710583381-medium.webp 1024w, /images/rose-in-winter/710583381-large.webp 1920w, /images/rose-in-winter/710583381.webp 2250w",
+          "width": 2250,
+          "height": 3000,
+          "alt": "a patio with a table and chairs on a house at Apartments Rose in winter in Bled"
+        }
+      ],
+      "bookingUrl": "https://www.booking.com/hotel/si/apartments-rose-in-winter.en-gb.html"
+    }
+  ],
+  "photos": [
+    {
+      "url": "/images/rose-in-winter/360805962.webp",
+      "srcSet": "/images/rose-in-winter/360805962-small.webp 600w, /images/rose-in-winter/360805962-medium.webp 1024w, /images/rose-in-winter/360805962-large.webp 1920w, /images/rose-in-winter/360805962.webp 2560w",
+      "width": 2560,
+      "height": 1920,
+      "alt": "The apartment house and its green garden at Rose in winter, Bled"
+    }
+  ],
+  "bookingUrl": "https://www.booking.com/hotel/si/apartments-rose-in-winter.en-gb.html",
+  "narrative": {
+    "heroTitle": "The quiet side of Bled,\na short walk to the lake.",
+    "heroText": "A family house in a garden by a small creek. Spotless, fully equipped apartments, free parking and a supermarket next door. The lake is about 10 minutes on foot.",
+    "introTitle": "The house",
+    "introText": "Close enough to walk everywhere, far enough from the main road to stay quiet. The apartments are spotless and fully equipped, breakfast tastes better at the tables under the trees, and the lake is about 10 minutes on foot, with the bus stop and restaurants closer still.",
+    "hostName": "Barbara",
+    "hostQuote": "Bled is a wonderful place to call home. Come and share it, at least for your holiday.",
+    "hostText": "Barbara and her family live in the house, so help is never far away, and guests rate her 9.9 out of 10.",
+    "practical": [
+      {
+        "label": "Arrive",
+        "value": "Check-in from 15:00 to 19:00. Let the property know your expected arrival time in advance."
+      },
+      {
+        "label": "Depart",
+        "value": "Check-out from 10:00 to 10:30."
+      },
+      {
+        "label": "Park",
+        "value": "Free private parking on site. No reservation needed."
+      },
+      {
+        "label": "Children",
+        "value": "Children older than 12 are welcome. Cots and extra beds are not available."
+      },
+      {
+        "label": "Keep it peaceful",
+        "value": "No smoking, pets or parties. Quiet hours are 22:00–07:00."
+      },
+      {
+        "label": "Prices",
+        "value": "Prices and availability depend on your dates and apartment. Send an enquiry and we’ll reply with an exact quote."
+      }
+    ],
+    "heroEyebrow": "Family-run apartments · Bled, Slovenia",
+    "highlights": [
+      {
+        "title": "Garden",
+        "text": "by a small creek, with tables under the trees"
+      },
+      {
+        "title": "Kitchen",
+        "text": "in every apartment, with dishwasher and oven"
+      },
+      {
+        "title": "Parking",
+        "text": "free and private, on site"
+      },
+      {
+        "title": "Shop",
+        "text": "250 m away"
+      }
+    ],
+    "locationText": "A quiet street by a small creek, close to the centre without the crowds.",
+    "heroQuote": {
+      "quote": "We didn’t want to leave.",
+      "author": "Christine",
+      "country": "United Kingdom"
+    }
+  },
+  "latitude": 46.3696019,
+  "longitude": 14.1194074,
+  "bookingRating": {
+    "value": 9.4,
+    "label": "Superb",
+    "count": 159,
+    "url": "https://www.booking.com/hotel/si/apartments-rose-in-winter.en-gb.html#tab-reviews",
+    "categories": [
+      {
+        "label": "Cleanliness",
+        "value": 9.6
+      },
+      {
+        "label": "Location",
+        "value": 9.5
+      },
+      {
+        "label": "Staff",
+        "value": 9.9
+      }
+    ]
+  },
+  "testimonials": [
+    {
+      "quote": "Nice, quiet, clean and fully equipped apartments, friendly host Barbara. Parking available, close to supermarket and short walking distance to Bled lake.",
+      "author": "Ivana",
+      "country": "Croatia",
+      "source": "Booking.com"
+    },
+    {
+      "quote": "Barbara was a fabulous host and extremely helpful when I lost my mobile phone. The apartment is quiet, clean, comfortable and very close to a handy supermarket. It's about 10 mins on foot to the lake and we liked being a bit away from the main town.",
+      "author": "Kate",
+      "country": "United Kingdom",
+      "source": "Booking.com"
+    },
+    {
+      "quote": "It was very comfortable clean with every thing you needed. The owner was very friendly and very helpful. We didn’t want to leave.",
+      "author": "Christine",
+      "country": "United Kingdom",
+      "source": "Booking.com"
+    },
+    {
+      "quote": "Great location. Short walk to the lake. Very near to the bus stop and supermarket. Host very helpful",
+      "author": "Catherine",
+      "country": "Ireland",
+      "source": "Booking.com"
+    },
+    {
+      "quote": "Great location and apartment was well equipped for our stay.",
+      "author": "Madeleine",
+      "country": "United Kingdom",
+      "source": "Booking.com"
+    }
+  ],
+  "host": {
+    "name": "Barbara",
+    "languages": [
+      "Slovenian",
+      "English",
+      "German",
+      "Italian",
+      "Croatian",
+      "Serbian"
+    ]
+  },
+  "nearby": [
+    {
+      "name": "Triglav National Park info centre",
+      "distance": "230 m",
+      "note": "Aerial film of Bled and Bohinj, event tips, coffee and homemade cake"
+    },
+    {
+      "name": "Shop",
+      "distance": "250 m"
+    },
+    {
+      "name": "Lake Bled",
+      "distance": "900 m",
+      "major": true
+    },
+    {
+      "name": "Bled Castle",
+      "distance": "2.1 km"
+    },
+    {
+      "name": "Vintgar Gorge",
+      "distance": "4.5 km"
+    },
+    {
+      "name": "Pokljuka",
+      "distance": "15 min drive",
+      "note": "Bohinj and Vogel for skiing in winter"
+    }
+  ]
+}

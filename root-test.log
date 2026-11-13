@@ -1,0 +1,33 @@
+
+> izba@0.1.0 test
+> node --test tests/node/*.test.mjs
+
+✔ Izba is organised by pipeline stages, not former repositories (4.56348ms)
+✔ collection does not call the AI classifier (1.558572ms)
+✔ runtime paths stay inside Izba and use the new stages (4.331641ms)
+✔ browser capture uses a dedicated subprocess with inherited terminal and explicit AI opt-in (1.523435ms)
+✔ devcontainer desktop options reach the Python launcher (0.62365ms)
+✔ browser capture rejects invalid channels and non-web URLs (0.240266ms)
+✔ URLs must be HTTP(S) without embedded credentials (1.098816ms)
+✔ capture caches exact sources and refresh creates a new immutable snapshot (41.471538ms)
+✔ failed capture is recorded and does not become a cached success (7.595351ms)
+✔ capture preserves unit ownership and surfaces partial coverage (4.047601ms)
+✔ malformed scraper output is rejected (2.931518ms)
+✔ generation refuses to overwrite an existing directory (0.988457ms)
+✔ generate and build stages record success and failure honestly (4.584375ms)
+✔ palette invokes the existing extractor without a shell (0.268891ms)
+✔ profile keeps source room identity and associates only explicitly listed unit photos (1.403713ms)
+✔ profile rejects guessed unit photos and missing files (0.532132ms)
+✔ profile rejects unsupported evidence and empty selection (0.742858ms)
+/tmp/izba-render-UTR2th/nature-nook
+✔ relocated renderer generates nature-nook with local assets and no legacy paths (89.114372ms)
+/tmp/izba-render-3rEy4Z/apartments-olga
+✔ relocated renderer generates apartments-olga with local assets and no legacy paths (83.174474ms)
+ℹ tests 19
+ℹ suites 0
+ℹ pass 19
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 528.529561

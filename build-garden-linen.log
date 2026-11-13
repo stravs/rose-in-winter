@@ -1,0 +1,36 @@
+
+> rose-in-winter@1.0.0 build
+> astro check && astro build
+
+18:04:12 [types] Generated 48ms
+18:04:12 [check] Getting diagnostics for Astro files in /workspace/izba/output/rose-in-winter...
+Result (26 files): 
+- 0 errors
+- 0 warnings
+- 0 hints
+
+18:04:17 [types] Generated 41ms
+18:04:17 [build] output: "static"
+18:04:17 [build] mode: "static"
+18:04:17 [build] directory: /workspace/izba/output/rose-in-winter/dist/
+18:04:17 [build] Collecting build info...
+18:04:17 [build] ✓ Completed in 83ms.
+18:04:17 [build] Building static entrypoints...
+18:04:17 [vite] ✓ built in 420ms
+18:04:17 [vite] ✓ built in 64ms
+18:04:17 [build] Rearranging server assets...
+
+ generating static routes 
+18:04:17   ├─ /robots.txt (+6ms) 
+18:04:17   ├─ /units/booking-room-120264301/index.html (+8ms) 
+18:04:17   ├─ /units/booking-room-120264302/index.html (+3ms) 
+18:04:17   ├─ /units/booking-room-120264303/index.html (+2ms) 
+18:04:17   ├─ /units/booking-room-120264304/index.html (+2ms) 
+18:04:17   ├─ /units/booking-room-120264305/index.html (+2ms) 
+18:04:17   ├─ /index.html (+5ms) 
+18:04:17 ✓ Completed in 43ms.
+
+18:04:17 [build] ✓ Completed in 560ms.
+18:04:17 [@astrojs/sitemap] `sitemap-index.xml` created at `dist`
+18:04:17 [build] 6 page(s) built in 655ms
+18:04:17 [build] Complete!

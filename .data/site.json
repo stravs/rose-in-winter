@@ -1,0 +1,163 @@
+{
+  "schemaVersion": 1,
+  "kind": "accommodation-profile",
+  "site": {
+    "slug": "rose-in-winter",
+    "locale": "en",
+    "locales": [
+      "en"
+    ],
+    "preview": true
+  },
+  "design": {
+    "family": "editorial",
+    "colors": {
+      "primary": "#24211D",
+      "accent": "#B23F1E",
+      "background": "#FBF8F2",
+      "surface": "#EEE8DD",
+      "text": "#24211D",
+      "muted": "#5F5A52"
+    },
+    "fonts": {
+      "heading": "IzbaNewsreader",
+      "body": "IzbaManrope"
+    },
+    "edges": "square",
+    "gallery": "editorial",
+    "hero": "split",
+    "units": "grid",
+    "amenities": "band",
+    "contact": "banner"
+  },
+  "sections": [
+    "intro",
+    "units",
+    "amenities",
+    "location",
+    "contact"
+  ],
+  "contact": {
+    "type": "booking"
+  },
+  "guestGuide": false,
+  "provenance": {
+    "sourceUrl": "https://www.booking.com/hotel/si/apartments-rose-in-winter.en-gb.html",
+    "retrievedAt": "2026-10-02T12:34:24.604903+00:00",
+    "snapshotId": "ce00663cde924efd94c2503ca5816a94",
+    "evidence": [
+      {
+        "field": "property.description",
+        "quote": "Located in Bled, just 1 km from the Lake and 1.5 km from the Castle, Apartments Rose in winter offers self-catering accommodation set in a garden with a stream."
+      },
+      {
+        "field": "property.address",
+        "quote": "Za potokom 1, 4260 Bled, Slovenia"
+      },
+      {
+        "field": "property.amenities.kitchen",
+        "quote": "There is a fully equipped kitchen with a dishwasher and an oven."
+      },
+      {
+        "field": "property.amenities.parking",
+        "quote": "Free private parking is possible on site (reservation is not needed)."
+      },
+      {
+        "field": "property.amenities.wifi",
+        "quote": "WiFi is available in all areas and is free of charge."
+      },
+      {
+        "field": "narrative.hostName",
+        "quote": "Managed by Barbara"
+      },
+      {
+        "field": "narrative.hostQuote",
+        "quote": "I am grateful for such a wonderful part of our planet to be my home! Welcome to be a part of it at least for your vacation :-) (host profile; lightly edited for the site)"
+      },
+      {
+        "field": "narrative.hostText",
+        "quote": "We live in the same house and we are here for you at any moment you need us. + Staff 9.9"
+      },
+      {
+        "field": "narrative.hostInterests",
+        "quote": "I like to swim in our lake Bled, walk around the lake and forests behind our house, sometimes I go to the beautiful Pokljuka just 15 min away with the car, to Bohinj lake and Vogel mountain to ski in the winter"
+      },
+      {
+        "field": "narrative.practical.checkIn",
+        "quote": "From 15:00 to 19:00"
+      },
+      {
+        "field": "narrative.practical.checkOut",
+        "quote": "From 10:00 to 10:30"
+      },
+      {
+        "field": "narrative.practical.arrival",
+        "quote": "You'll need to let the property know in advance what time you'll arrive."
+      },
+      {
+        "field": "narrative.practical.children",
+        "quote": "Children older than 12 years are welcome."
+      },
+      {
+        "field": "narrative.practical.extraBeds",
+        "quote": "Cots and extra beds are not available at this property."
+      },
+      {
+        "field": "narrative.practical.smoking",
+        "quote": "Smoking is not allowed."
+      },
+      {
+        "field": "narrative.practical.pets",
+        "quote": "Pets are not allowed."
+      },
+      {
+        "field": "narrative.practical.parties",
+        "quote": "Parties/events are not allowed"
+      },
+      {
+        "field": "narrative.practical.quiet",
+        "quote": "Guests must be quiet between 22:00 and 07:00."
+      },
+      {
+        "field": "narrative.practical.cancellation",
+        "quote": "Cancellation and prepayment policies vary according to accommodation type."
+      },
+      {
+        "field": "property.latitude/longitude",
+        "quote": "Google Maps place \"Apartments Rose in Winter\", Za Potokom 1, 4260 Bled: !3d46.3696019!4d14.1194074 (checked 2026-11-13; replaces Booking data-atlas-latlng 46.36969221463176,14.11967707182771)"
+      },
+      {
+        "field": "property.bookingRating",
+        "quote": "9.4 Superb · 159 reviews; Staff 9.9, Cleanliness 9.6, Location 9.5"
+      },
+      {
+        "field": "property.testimonials",
+        "quote": "Booking.com \"Guests who stayed here loved\" featured reviews (verbatim positive text, first name and country as shown)"
+      },
+      {
+        "field": "property.nearby",
+        "quote": "What's nearby: Triglavski narodni park 250 yd; Restavracija Topolino 450 yd; Gostilna Union 600 yd; Bled Lake 1,000 yd; Bled Castle 1.3 mi; Vintgar Gorge 2.8 mi (converted to metric)"
+      },
+      {
+        "field": "property.host",
+        "quote": "Owner-supplied Booking host profile (pasted by operator 2026-11-13): Managed by Barbara; Languages spoken German, English, Croatian, Italian, Slovenian, Serbian"
+      },
+      {
+        "field": "narrative.highlights/nearby notes",
+        "quote": "Host neighbourhood text (pasted 2026-11-13): small shop next door with fresh bread every morning; Triglav national park information center with film, events, coffee and home made cakes; garden and small creek; Pokljuka 15 min by car"
+      },
+      {
+        "field": "narrative.introText",
+        "quote": "Featured reviews: \"Tucked away just off the main thoroughfare in Bled\"; \"peaceful surroundings next to a creek\"; \"nice outdoor seating area under the trees\"; \"very clean and comfortable and fully equipped\"; \"Very near to the bus stop and supermarket\""
+      }
+    ],
+    "imageAssociations": "Explicit Booking room records; associations may overlap between room types.",
+    "approval": "private-preview-only",
+    "warnings": [
+      "Photo reuse rights and current facts require owner approval.",
+      "Room types are not a verified count of physical apartments.",
+      "Host-profile walking time (7 min) conflicts with listing distances; copy uses Booking.com metres (900 m to the lake). Host text about kids swimming omitted: Booking.com policy is children over 12.",
+      "Enquiry form has no delivery target yet; it does not send."
+    ]
+  }
+}
