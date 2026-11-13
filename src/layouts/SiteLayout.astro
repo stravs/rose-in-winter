@@ -21,6 +21,7 @@ const palette = `--color-dark:${c.primary};--color-accent:${c.accent};--color-bg
 <html lang="en" style={palette}>
   <head>
     <meta charset="UTF-8" />
+    <script is:inline>document.documentElement.classList.add('js')</script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
@@ -36,10 +37,24 @@ const palette = `--color-dark:${c.primary};--color-accent:${c.accent};--color-bg
     <meta property="og:url" content={canonical} />
     {image && <meta property="og:image" content={new URL(image, canonical).href} />}
     <meta name="twitter:card" content="summary_large_image" />
-    {jsonLd && <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+    {/* Escape "<" so scraped text containing "</script>" cannot end the tag. */}
+    {jsonLd && <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd).replaceAll('<', '\\u003c')} />}
   </head>
   <body class="bg-bg text-ink font-sans antialiased">
     <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:bg-ink focus:text-bg focus:px-4 focus:py-2 focus:rounded-full">Skip to content</a>
     <slot />
+    <script>
+      // Reveal [data-reveal] elements once they scroll into view (styles in site.css).
+      const reveal = (el: Element) => el.classList.add('is-visible');
+      const targets = document.querySelectorAll('[data-reveal]');
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          reveal(entry.target);
+          observer.unobserve(entry.target);
+        }), { rootMargin: '0px 0px -8% 0px' });
+        targets.forEach((el) => observer.observe(el));
+      } else targets.forEach(reveal);
+    </script>
   </body>
 </html>

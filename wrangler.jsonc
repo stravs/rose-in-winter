@@ -1,0 +1,11 @@
+// Static site on Cloudflare Workers Static Assets: no Worker script, no adapter.
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "rose-in-winter",
+  "compatibility_date": "2026-11-13",
+  "assets": {
+    "directory": "./dist",
+    // /units/x/index.html is served at /units/x/; /units/x redirects there. Matches trailingSlash: 'always'.
+    "html_handling": "auto-trailing-slash"
+  }
+}

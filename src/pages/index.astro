@@ -37,14 +37,15 @@ const jsonLd = {
 };
 ---
 <SiteLayout title={`${property.name} | ${property.city}`} description={propertyMetaDescription(property)} {canonical} image={hero?.url} {jsonLd}>
+  <main id="main">
   <section class="relative">
-    <div class="relative h-[62vh] min-h-[420px] lg:h-svh lg:min-h-[560px] bg-dark text-white">
-      <img src={painting.url} srcset={painting.srcSet} sizes="100vw" width={painting.width} height={painting.height} alt={painting.alt} fetchpriority="high" class="absolute inset-0 w-full h-full object-cover object-center" />
+    <div class="relative overflow-hidden h-[62vh] min-h-[420px] lg:h-svh lg:min-h-[560px] bg-dark text-white">
+      <img src={painting.url} srcset={painting.srcSet} sizes="100vw" width={painting.width} height={painting.height} alt={painting.alt} fetchpriority="high" class="absolute inset-0 w-full h-full object-cover object-center motion-safe:animate-settle" />
       <SiteHeader {property} overlay />
     </div>
-    <div id="main" class="relative -mt-24 lg:absolute lg:inset-x-0 lg:bottom-12 lg:mt-0">
+    <div class="relative -mt-24 lg:absolute lg:inset-x-0 lg:bottom-12 lg:mt-0">
       <div class="mx-auto max-w-7xl px-4 sm:px-6">
-        <div class="max-w-[36rem] bg-bg rounded-2xl p-6 sm:p-10 shadow-2xl shadow-dark/30">
+        <div class="max-w-[36rem] bg-bg rounded-2xl p-6 sm:p-10 shadow-2xl shadow-dark/30 motion-safe:animate-rise motion-safe:[animation-delay:.35s]">
           {story.heroEyebrow && <p class="text-sm font-semibold uppercase tracking-[.14em] text-muted">{story.heroEyebrow}</p>}
           <h1 class="font-serif text-4xl sm:text-5xl leading-[1.04] mt-4">{heroLine1}{heroLine2 && <><br /><em>{heroLine2}</em></>}</h1>
           <p class="mt-5 text-lg text-muted">{story.heroText}</p>
@@ -69,22 +70,24 @@ const jsonLd = {
   <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:grid lg:grid-cols-[1fr_360px] lg:gap-16">
     <div class="min-w-0">
       <section class="py-20" aria-labelledby="house-title">
-        <h2 id="house-title" class="font-serif text-4xl sm:text-5xl">{story.introTitle}</h2>
-        <p class="mt-4 text-lg text-muted max-w-2xl">{story.introText}</p>
+        <div data-reveal>
+          <h2 id="house-title" class="font-serif text-4xl sm:text-5xl">{story.introTitle}</h2>
+          <p class="mt-4 text-lg text-muted max-w-2xl">{story.introText}</p>
+        </div>
         <div class:list={['mt-10 grid gap-8 sm:gap-10 items-center', housePhoto && 'sm:grid-cols-2']}>
           {housePhoto && (
-            <figure>
+            <figure data-reveal>
               <img src={housePhoto.url} srcset={housePhoto.srcSet} sizes="(max-width: 640px) 92vw, 420px" width={housePhoto.width} height={housePhoto.height} alt={housePhoto.alt} loading="lazy" decoding="async" class="w-full aspect-[4/5] object-cover rounded-2xl bg-soft" />
               {housePhoto.alt && <figcaption class="mt-3 text-sm text-muted">{housePhoto.alt}</figcaption>}
             </figure>
           )}
           {story.highlights && (
             <ul class="grid sm:grid-cols-2 gap-x-10 gap-y-8">
-              {story.highlights.map((item) => <li class="border-t border-ink/20 pt-5"><strong class="block font-serif text-3xl font-normal">{item.title}</strong><span class="mt-2 block text-muted">{item.text}</span></li>)}
+              {story.highlights.map((item, index) => <li data-reveal style={`--reveal-delay:${index * 100}ms`} class="border-t border-ink/20 pt-5"><strong class="block font-serif text-3xl font-normal">{item.title}</strong><span class="mt-2 block text-muted">{item.text}</span></li>)}
             </ul>
           )}
         </div>
-        <figure id="host" class="mt-14 bg-soft rounded-2xl p-8 sm:p-10 scroll-mt-6">
+        <figure id="host" data-reveal class="mt-14 bg-soft rounded-2xl p-8 sm:p-10 scroll-mt-6">
           {story.hostQuote && <blockquote class="font-serif text-3xl sm:text-4xl leading-tight">“{story.hostQuote}”</blockquote>}
           <figcaption class="mt-5 text-muted max-w-2xl">
             {story.hostText}
@@ -94,18 +97,20 @@ const jsonLd = {
       </section>
 
       <section id="apartments" class="pb-20 scroll-mt-6" aria-labelledby="apartments-title">
-        <h2 id="apartments-title" class="font-serif text-4xl sm:text-5xl">The apartments</h2>
-        <p class="mt-4 text-lg text-muted">All with a kitchen, seating area, TV and free Wi-Fi. For adults and children over 12.</p>
+        <div data-reveal>
+          <h2 id="apartments-title" class="font-serif text-4xl sm:text-5xl">The apartments</h2>
+          <p class="mt-4 text-lg text-muted">All with a kitchen, seating area, TV and free Wi-Fi. For adults and children over 12.</p>
+        </div>
         <div class="mt-8 divide-y divide-ink/10 border-y border-ink/10">
           {property.units.map((unit) => {
             const cover = unit.photos[0];
             return (
-              <article class="py-8 grid sm:grid-cols-[220px_1fr] gap-5 sm:gap-8 items-center">
-                <a href={unitPath(unit, 'en')} tabindex="-1" aria-hidden="true">
-                  {cover && <img src={cover.url} srcset={cover.srcSet} sizes="(max-width: 640px) 92vw, 220px" width={cover.width} height={cover.height} alt="" loading="lazy" decoding="async" class="w-full aspect-[4/3] object-cover rounded-2xl bg-soft" />}
+              <article data-reveal class="group py-8 grid sm:grid-cols-[220px_1fr] gap-5 sm:gap-8 items-center">
+                <a href={unitPath(unit, 'en')} tabindex="-1" aria-hidden="true" class="block overflow-hidden rounded-2xl">
+                  {cover && <img src={cover.url} srcset={cover.srcSet} sizes="(max-width: 640px) 92vw, 220px" width={cover.width} height={cover.height} alt="" loading="lazy" decoding="async" class="w-full aspect-[4/3] object-cover bg-soft transition-transform duration-700 ease-gentle group-hover:scale-[1.04]" />}
                 </a>
                 <div>
-                  <h3 class="font-serif text-2xl sm:text-3xl"><a href={unitPath(unit, 'en')} class="hover:text-accent">{unit.name}</a></h3>
+                  <h3 class="font-serif text-2xl sm:text-3xl"><a href={unitPath(unit, 'en')} class="transition-colors hover:text-accent">{unit.name}</a></h3>
                   <p class="mt-2 text-muted">{unitFacts(unit)}</p>
                   <p class="mt-5"><a href={unitPath(unit, 'en')} class="link">{unit.photos.length} photos and details</a></p>
                 </div>
@@ -122,7 +127,7 @@ const jsonLd = {
   {rating && (
     <section id="reviews" class="bg-soft scroll-mt-6" aria-labelledby="reviews-title">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 py-20">
-        <div class="flex flex-wrap items-end justify-between gap-8">
+        <div data-reveal class="flex flex-wrap items-end justify-between gap-8">
           <div>
             <h2 id="reviews-title" class="font-serif text-4xl sm:text-5xl">What guests say</h2>
             <p class="mt-3 text-muted">Reviews and scores from guests who booked on Booking.com.</p>
@@ -133,7 +138,7 @@ const jsonLd = {
           </dl>
         </div>
         {property.testimonials && (
-          <div class="mt-12 flex gap-5 overflow-x-auto snap-x snap-mandatory pb-4 -mx-4 px-4 sm:mx-0 sm:px-0 lg:block lg:columns-3 lg:gap-5 lg:overflow-visible lg:pb-0" tabindex="0" aria-label="Guest reviews">
+          <div data-reveal class="mt-12 flex gap-5 overflow-x-auto snap-x snap-mandatory pb-4 -mx-4 px-4 sm:mx-0 sm:px-0 lg:block lg:columns-3 lg:gap-5 lg:overflow-visible lg:pb-0" tabindex="0" aria-label="Guest reviews">
             {property.testimonials.map((review) => (
               <figure class="snap-start shrink-0 w-[85%] sm:w-[420px] lg:w-auto lg:mb-5 lg:break-inside-avoid bg-bg rounded-2xl p-7">
                 <blockquote class="font-serif text-xl leading-snug">“{review.quote}”</blockquote>
@@ -149,7 +154,7 @@ const jsonLd = {
 
   <section id="location" class="scroll-mt-6" aria-labelledby="location-title">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 py-20 grid lg:grid-cols-2 gap-12">
-      <div>
+      <div data-reveal>
         <h2 id="location-title" class="font-serif text-4xl sm:text-5xl">From the garden gate</h2>
         <p class="mt-4 text-lg text-muted">{propertyLocation(property, { country: false })}. {story.locationText}</p>
         {property.nearby && (
@@ -166,7 +171,7 @@ const jsonLd = {
         )}
         <p class="mt-8 text-sm text-muted">Distances are approximate.</p>
       </div>
-      <div class="flex flex-col gap-4">
+      <div data-reveal style="--reveal-delay:150ms" class="flex flex-col gap-4">
         <iframe class="w-full grow min-h-96 rounded-2xl border-0 bg-soft" src={mapEmbed} title={`Map showing ${property.name}, ${property.city}`} loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         <a class="link self-start" href={mapLink} target="_blank" rel="noopener noreferrer">Directions in Google Maps ↗</a>
       </div>
@@ -175,12 +180,13 @@ const jsonLd = {
 
   <section id="arrival" class="bg-soft scroll-mt-6" aria-labelledby="arrival-title">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 py-20">
-      <h2 id="arrival-title" class="font-serif text-4xl sm:text-5xl">Good to know</h2>
+      <h2 id="arrival-title" data-reveal class="font-serif text-4xl sm:text-5xl">Good to know</h2>
       <dl class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-8">
-        {story.practical.map((item) => <div><dt class="font-serif text-2xl">{item.label}</dt><dd class="mt-2 text-muted">{item.value}</dd></div>)}
+        {story.practical.map((item, index) => <div data-reveal style={`--reveal-delay:${(index % 3) * 100}ms`}><dt class="font-serif text-2xl">{item.label}</dt><dd class="mt-2 text-muted">{item.value}</dd></div>)}
       </dl>
     </div>
   </section>
+  </main>
 
   <SiteFooter {property} />
 </SiteLayout>

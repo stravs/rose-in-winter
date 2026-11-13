@@ -8,5 +8,6 @@ export function unitSlug(unit: UnitRef): string {
   return slug || `unit-${Array.from(new TextEncoder().encode(unit.id), (byte) => byte.toString(16).padStart(2, '0')).join('')}`;
 }
 export function unitPath(unit: UnitRef, locale: Locale): string {
-  return localePath(locale, `/units/${unitSlug(unit)}/`);
+  // Trailing slash matches trailingSlash: 'always', directory output and the sitemap.
+  return `${localePath(locale, `units/${unitSlug(unit)}`)}/`;
 }

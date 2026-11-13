@@ -6,7 +6,7 @@ const nav = 'shrink-0 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 text-
 ---
 <!-- Opened by any button with data-photo="<index>". -->
 <dialog id="lightbox" data-photos={JSON.stringify(photos.map(({ url, alt }) => ({ url, alt })))} aria-label={`Photos of ${title}`}
-  class="m-0 w-full h-full max-w-none max-h-none bg-dark text-white p-0 backdrop:bg-dark">
+  class="m-0 w-full h-full max-w-none max-h-none bg-dark text-white p-0 backdrop:bg-dark open:motion-safe:animate-fade">
   <div class="h-full flex flex-col">
     <div class="flex items-center justify-between gap-4 px-4 sm:px-6 h-16">
       <p class="text-sm">{title} · <span data-current>1</span> / {photos.length}</p>
@@ -38,6 +38,7 @@ const nav = 'shrink-0 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 text-
       image.alt = photo.alt ?? `Photo ${index + 1}`;
       caption.textContent = photo.alt ?? '';
       current.textContent = String(index + 1);
+      if (!matchMedia('(prefers-reduced-motion: reduce)').matches) image.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 300, easing: 'ease-out' });
     };
     document.querySelectorAll<HTMLElement>('[data-photo]').forEach((button) => button.addEventListener('click', () => {
       show(Number(button.dataset.photo));

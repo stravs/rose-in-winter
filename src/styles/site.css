@@ -14,11 +14,20 @@
   --color-muted: #5F5A52;
   --font-serif: Newsreader, Georgia, serif;
   --font-sans: Manrope, system-ui, sans-serif;
+  --ease-gentle: cubic-bezier(.2, .7, .2, 1);
+  /* Hero: the painting settles, then the card rises. */
+  --animate-settle: settle 2.4s var(--ease-gentle) both;
+  --animate-rise: rise .9s var(--ease-gentle) both;
+  --animate-fade: fade .35s ease-out both;
+  @keyframes settle { from { scale: 1.06; } }
+  /* No opacity: the hero card (h1) and unit cover photo (LCP) stay visible from the first paint. */
+  @keyframes rise { from { translate: 0 1.25rem; } }
+  @keyframes fade { from { opacity: 0; } }
 }
 
 /* One primary and one secondary button, same size everywhere. */
 @utility btn {
-  @apply inline-flex items-center justify-center rounded-full px-6 py-3 text-base font-semibold whitespace-nowrap transition-colors;
+  @apply inline-flex items-center justify-center rounded-full px-6 py-3 text-base font-semibold whitespace-nowrap transition duration-300 ease-gentle motion-safe:hover:-translate-y-px motion-safe:active:translate-y-0;
 }
 @utility btn-primary {
   @apply btn bg-accent text-white hover:brightness-90;
@@ -31,5 +40,11 @@
 }
 
 @layer base {
-  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: no-preference) {
+    html { scroll-behavior: smooth; }
+    /* Scroll reveal: [data-reveal] fades up when it enters the viewport (SiteLayout script).
+       Hidden only when JS runs; style="--reveal-delay:…" staggers siblings. Tailwind has no scroll-trigger utility. */
+    [data-reveal] { transition: opacity .9s var(--ease-gentle), translate .9s var(--ease-gentle); transition-delay: var(--reveal-delay, 0ms); }
+    .js [data-reveal]:not(.is-visible) { opacity: 0; translate: 0 1.5rem; }
+  }
 }

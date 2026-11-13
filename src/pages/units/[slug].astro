@@ -68,15 +68,15 @@ const photoButton = 'block w-full h-full overflow-hidden bg-soft cursor-zoom-in 
           <div class="md:hidden mt-6 -mx-4 px-4 flex gap-3 overflow-x-auto snap-x snap-mandatory" tabindex="0" aria-label={`Photos of ${unit.name}, scroll sideways`}>
             {photos.map((photo, index) => (
               <button type="button" data-photo={index} class="snap-center shrink-0 w-[85%] aspect-[4/3] rounded-2xl overflow-hidden bg-soft" aria-label={`Open photo ${index + 1} of ${photos.length}`}>
-                <img src={photo.url} srcset={photo.srcSet} sizes="85vw" width={photo.width} height={photo.height} alt={photo.alt ?? ''} loading={index === 0 ? 'eager' : 'lazy'} decoding="async" class="w-full h-full object-cover" />
+                <img src={photo.url} srcset={photo.srcSet} sizes="85vw" width={photo.width} height={photo.height} alt={photo.alt ?? ''} loading="lazy" fetchpriority={index === 0 ? 'high' : undefined} decoding="async" class="w-full h-full object-cover" />
               </button>
             ))}
           </div>
           <!-- Desktop: cover plus four. -->
-          <div class="hidden md:grid mt-8 grid-cols-4 grid-rows-2 gap-3 h-[min(560px,62vh)] rounded-2xl overflow-hidden relative">
+          <div class="hidden md:grid mt-8 grid-cols-4 grid-rows-2 gap-3 h-[min(560px,62vh)] rounded-2xl overflow-hidden relative motion-safe:animate-rise">
             {mosaic.map((photo, index) => (
               <button type="button" data-photo={index} class:list={[photoButton, index === 0 && 'col-span-2 row-span-2']} aria-label={`Open photo ${index + 1} of ${photos.length}`}>
-                <img src={photo.url} srcset={photo.srcSet} sizes={index === 0 ? '50vw' : '25vw'} width={photo.width} height={photo.height} alt={photo.alt ?? ''} loading={index === 0 ? 'eager' : 'lazy'} fetchpriority={index === 0 ? 'high' : undefined} decoding="async" class="w-full h-full object-cover transition-transform duration-500 hover:scale-[1.03]" />
+                <img src={photo.url} srcset={photo.srcSet} sizes={index === 0 ? '50vw' : '25vw'} width={photo.width} height={photo.height} alt={photo.alt ?? ''} loading="lazy" fetchpriority={index === 0 ? 'high' : undefined} decoding="async" class="w-full h-full object-cover transition-transform duration-700 ease-gentle hover:scale-[1.03]" />
               </button>
             ))}
             {photos.length > mosaic.length && <button type="button" data-photo="0" class="absolute right-4 bottom-4 btn bg-white text-ink shadow-lg hover:bg-bg">Show all {photos.length} photos</button>}
@@ -87,7 +87,7 @@ const photoButton = 'block w-full h-full overflow-hidden bg-soft cursor-zoom-in 
 
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:grid lg:grid-cols-[1fr_360px] lg:gap-14">
       <div class="min-w-0 pb-16">
-        <section aria-labelledby="details-title">
+        <section data-reveal aria-labelledby="details-title">
           <h2 id="details-title" class="font-serif text-3xl sm:text-4xl">The apartment</h2>
           {unit.description && <p class="mt-4 text-lg text-muted max-w-2xl">{unit.description}</p>}
           <dl class="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-6">
@@ -104,7 +104,7 @@ const photoButton = 'block w-full h-full overflow-hidden bg-soft cursor-zoom-in 
         </section>
 
         {story?.highlights && (
-          <section class="mt-16 pt-12 border-t border-ink/10" aria-labelledby="house-title">
+          <section data-reveal class="mt-16 pt-12 border-t border-ink/10" aria-labelledby="house-title">
             <h2 id="house-title" class="font-serif text-3xl sm:text-4xl">Shared by every apartment</h2>
             <ul class="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-8">
               {story.highlights.map((item) => <li><strong class="block font-serif text-2xl font-normal">{item.title}</strong><span class="mt-1 block text-muted">{item.text}</span></li>)}
@@ -116,7 +116,7 @@ const photoButton = 'block w-full h-full overflow-hidden bg-soft cursor-zoom-in 
         )}
 
         {story && (
-          <section id="arrival" class="mt-16 pt-12 border-t border-ink/10" aria-labelledby="arrival-title">
+          <section id="arrival" data-reveal class="mt-16 pt-12 border-t border-ink/10" aria-labelledby="arrival-title">
             <h2 id="arrival-title" class="font-serif text-3xl sm:text-4xl">Good to know</h2>
             <dl class="mt-6 grid sm:grid-cols-2 gap-x-10 gap-y-6">
               {story.practical.map((item) => <div><dt class="font-semibold">{item.label}</dt><dd class="mt-1 text-muted">{item.value}</dd></div>)}
@@ -131,15 +131,17 @@ const photoButton = 'block w-full h-full overflow-hidden bg-soft cursor-zoom-in 
     {otherUnits.length > 0 && (
       <section class="bg-soft" aria-labelledby="other-title">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 py-16">
-          <h2 id="other-title" class="font-serif text-3xl sm:text-4xl">Other apartments</h2>
+          <h2 id="other-title" data-reveal class="font-serif text-3xl sm:text-4xl">Other apartments</h2>
           <ul class="mt-8 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {otherUnits.map((other) => {
+            {otherUnits.map((other, index) => {
               const cover = other.photos[0];
               return (
-                <li>
+                <li data-reveal style={`--reveal-delay:${index * 100}ms`}>
                   <a href={unitPath(other, 'en')} class="group block">
-                    {cover && <img src={cover.url} srcset={cover.srcSet} sizes="(max-width: 640px) 92vw, (max-width: 1024px) 46vw, 23vw" width={cover.width} height={cover.height} alt="" loading="lazy" decoding="async" class="w-full aspect-[4/3] object-cover rounded-2xl bg-bg" />}
-                    <h3 class="mt-4 font-serif text-2xl group-hover:text-accent">{other.name}</h3>
+                    <div class="overflow-hidden rounded-2xl">
+                    {cover && <img src={cover.url} srcset={cover.srcSet} sizes="(max-width: 640px) 92vw, (max-width: 1024px) 46vw, 23vw" width={cover.width} height={cover.height} alt="" loading="lazy" decoding="async" class="w-full aspect-[4/3] object-cover bg-bg transition-transform duration-700 ease-gentle group-hover:scale-[1.04]" />}
+                    </div>
+                    <h3 class="mt-4 font-serif text-2xl transition-colors group-hover:text-accent">{other.name}</h3>
                     <p class="mt-1 text-muted">{unitFacts(other)}</p>
                   </a>
                 </li>
