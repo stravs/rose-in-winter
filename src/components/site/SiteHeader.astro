@@ -91,7 +91,7 @@ const focus = 'focus-visible:outline-2 focus-visible:outline-offset-4 focus-visi
     const disclosures = [...header.querySelectorAll<HTMLDetailsElement>('[data-header-disclosure]')];
     const close = (details: HTMLDetailsElement, restoreFocus = false) => {
       details.open = false;
-      if (restoreFocus) details.querySelector('summary')?.focus();
+      if (restoreFocus) details.querySelector('summary')?.focus({ preventScroll: true });
     };
     disclosures.forEach(details => {
       const summary = details.querySelector('summary')!;
@@ -105,15 +105,23 @@ const focus = 'focus-visible:outline-2 focus-visible:outline-offset-4 focus-visi
         sync();
         if (details.open) disclosures.filter(other => other !== details).forEach(other => close(other));
       });
-      details.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
-        // Return focus before hiding the panel; an enquiry link then focuses its form.
-        close(details, true);
-        if (link.getAttribute('href') === '#enquiry') {
-          document.querySelector<HTMLInputElement>('#enquiry input[name="name"]')?.focus({ preventScroll: true });
-        }
+      details.querySelectorAll('a').forEach(link => link.addEventListener('click', event => {
+        // Do not hide or refocus a link before its native navigation runs.
+        // Only same-page anchors need menu cleanup; other links leave this page.
+        if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+        const destination = new URL(link.href);
+        if (destination.origin !== location.origin || destination.pathname !== location.pathname || destination.search !== location.search || !destination.hash) return;
+        requestAnimationFrame(() => {
+          close(details, true);
+          if (destination.hash === '#enquiry') {
+            document.querySelector<HTMLInputElement>('#enquiry input[name="name"]')?.focus({ preventScroll: true });
+          }
+        });
       }));
-      details.addEventListener('focusout', () => {
-        queueMicrotask(() => { if (!details.contains(document.activeElement)) close(details); });
+      details.addEventListener('focusout', event => {
+        // A null relatedTarget can occur on pointer activation; outside-click handling
+        // will close the menu without swallowing the subsequent click.
+        if (event.relatedTarget instanceof Node && !details.contains(event.relatedTarget)) close(details);
       });
     });
     document.addEventListener('click', event => {

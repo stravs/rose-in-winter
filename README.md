@@ -32,3 +32,15 @@ Check all 24 pages, translation coverage, links and language metadata:
 npm run build
 node --test tests/*.test.mjs
 ```
+
+Browser regression tests cover apartment/language link activation (mouse on desktop,
+touch on mobile) and Escape/focus handling against the production build. Install
+Chromium once, start `npm run preview -- --host`, then use its printed port:
+
+```sh
+npx playwright install chromium --only-shell
+NAV_TEST_URL=http://127.0.0.1:4323 npx playwright test tests/navigation.spec.ts --workers=1 --reporter=line --output=.git/playwright-results
+```
+
+When using a project-local browser cache, set `PLAYWRIGHT_BROWSERS_PATH` to the same
+path for both the browser install and the test command.
