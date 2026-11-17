@@ -1,0 +1,60 @@
+---
+import type { Property } from '../../domain/property';
+import { localeFromPath, translator } from '../../i18n';
+interface Props { property: Property }
+const { property } = Astro.props;
+const t = translator(localeFromPath(Astro.url.pathname));
+---
+<ol data-location-timeline class="mt-10 relative border-l-2 border-ink/15 ml-2 space-y-7">
+  <li class="pl-7 relative">
+    <span data-timeline-stop aria-hidden="true" class="absolute -left-[7px] top-2 w-3 h-3 rounded-full bg-bg border-2 border-ink/40"></span>
+    <span data-timeline-dot aria-hidden="true" class="pointer-events-none absolute z-10 -left-[9px] top-1.5 w-4 h-4 rounded-full bg-ink"></span>
+    <strong>{property.name.replace(/^Apartments /, '')}</strong><br />
+    <span class="text-muted">{t('Garden, creek, free parking')}</span>
+  </li>
+  {property.nearby?.map(place => (
+    <li class="pl-7 relative">
+      <span data-timeline-stop aria-hidden="true" class="absolute -left-[7px] top-2 w-3 h-3 rounded-full bg-bg border-2 border-ink/40"></span>
+      {place.major ? <strong>{place.name}</strong> : place.name} <span class="text-muted">· {place.distance}</span>
+      {place.note && <><br /><span class="text-muted">{place.note}</span></>}
+    </li>
+  ))}
+</ol>
+<script>
+  import { timelineOffset } from '../../domain/timeline';
+
+  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+  const timelines = [...document.querySelectorAll<HTMLOListElement>('[data-location-timeline]')];
+  let pending = false;
+  const update = () => {
+    pending = false;
+    for (const timeline of timelines) {
+      const dot = timeline.querySelector<HTMLElement>('[data-timeline-dot]');
+      const stops = timeline.querySelectorAll<HTMLElement>('[data-timeline-stop]');
+      if (!dot || !stops.length) continue;
+      const centres = [...stops].map(stop => {
+        const rect = stop.getBoundingClientRect();
+        return rect.top + rect.height / 2;
+      });
+      // Jump directly to the nearest hollow dot, including unevenly spaced stops.
+      const offset = reducedMotion.matches ? 0 : timelineOffset(centres, window.innerHeight * 0.55);
+      dot.style.transform = `translateY(${offset}px)`;
+    }
+  };
+  const schedule = () => {
+    if (pending) return;
+    pending = true;
+    requestAnimationFrame(update);
+  };
+  if (timelines.length) {
+    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', schedule);
+    window.addEventListener('pageshow', schedule);
+    reducedMotion.addEventListener('change', schedule);
+    // Translations, font loading and mobile wrapping can change the track length.
+    const observer = new ResizeObserver(schedule);
+    timelines.forEach(timeline => observer.observe(timeline));
+    document.fonts.ready.then(schedule);
+    schedule();
+  }
+</script>

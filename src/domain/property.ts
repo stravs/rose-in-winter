@@ -22,6 +22,8 @@ export type PropertyPrice = {
 
 export type PropertyUnit = {
   id: string;
+  /** Stable English URL slug, retained in translated views. */
+  slug?: string;
   name: string;
   type?: string;
   description?: string;

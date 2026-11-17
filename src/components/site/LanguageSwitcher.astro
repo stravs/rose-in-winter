@@ -1,0 +1,40 @@
+---
+import { locales, localeFromPath, localePath, pathWithoutLocale, languageNames, translator } from '../../i18n';
+interface Props { expanded?: boolean }
+const { expanded = false } = Astro.props;
+const locale = localeFromPath(Astro.url.pathname);
+const page = pathWithoutLocale(Astro.url.pathname);
+const t = translator(locale);
+const focus = 'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current';
+---
+{expanded ? (
+  <nav aria-label={t('Language')} class="grid grid-cols-2 gap-2">
+    {locales.map(language => (
+      <a href={localePath(language, page)} lang={language} hreflang={language} title={languageNames[language]}
+        aria-label={languageNames[language]} aria-current={language === locale ? 'page' : undefined}
+        class:list={['flex min-h-11 items-center justify-between gap-2 rounded-lg border px-3 py-2.5 text-sm font-medium transition-colors', focus, language === locale ? 'border-ink bg-ink text-bg' : 'border-ink/15 hover:bg-soft']}>
+        {languageNames[language]}
+        {language === locale && <span aria-hidden="true">✓</span>}
+      </a>
+    ))}
+  </nav>
+) : (
+  <details data-header-disclosure class="group/language relative">
+    <summary aria-label={`${t('Language')}: ${languageNames[locale]}`} aria-controls="desktop-languages"
+      class:list={['flex min-h-11 cursor-pointer list-none items-center gap-2 rounded-lg px-2 text-sm font-semibold [&::-webkit-details-marker]:hidden hover:opacity-70 transition-opacity', focus]}>
+      <svg class="size-4 opacity-75" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="9" /><ellipse cx="12" cy="12" rx="4" ry="9" /><path d="M3 12h18" /></svg>
+      {locale.toUpperCase()}
+      <svg class="size-3 transition-transform group-open/language:rotate-180" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m4 6 4 4 4-4" /></svg>
+    </summary>
+    <nav id="desktop-languages" aria-label={t('Language')} class="absolute right-0 top-full mt-3 min-w-44 rounded-xl border border-ink/10 bg-bg text-ink p-2 shadow-xl shadow-dark/15">
+      {locales.map(language => (
+        <a href={localePath(language, page)} lang={language} hreflang={language} title={languageNames[language]}
+          aria-label={languageNames[language]} aria-current={language === locale ? 'page' : undefined}
+          class:list={['flex min-h-11 items-center justify-between gap-4 rounded-lg px-3 py-2 text-sm transition-colors hover:bg-soft', focus, language === locale && 'bg-soft font-semibold']}>
+          {languageNames[language]}
+          {language === locale && <span aria-hidden="true">✓</span>}
+        </a>
+      ))}
+    </nav>
+  </details>
+)}

@@ -1,22 +1,25 @@
 ---
 import type { Property } from '../../domain/property';
+import { translator, localeFromPath } from '../../i18n';
+const locale = localeFromPath(Astro.url.pathname);
+const t = translator(locale);
 interface Props { property: Property; /** Apartment preselected in the form. */ selected?: string; class?: string }
 const { property, selected, class: className } = Astro.props;
 const field = 'border border-ink/50 rounded-xl py-2.5 bg-white text-base';
 ---
 <aside id="enquiry" class="scroll-mt-6" aria-labelledby="enquiry-title">
   <div class:list={['relative bg-white rounded-2xl p-6 sm:p-8 border border-ink/10 shadow-xl shadow-dark/5', className]}>
-    <h2 id="enquiry-title" class="font-serif text-3xl">Send enquiry</h2>
-    <p class="text-muted mt-2">We'll reply with availability and the price for your dates.</p>
-    <form class="mt-6 grid grid-cols-2 gap-3 text-sm" data-enquiry>
-      <label class="col-span-2 flex flex-col gap-1">Name<input required name="name" autocomplete="name" class={`${field} px-3`} /></label>
-      <label class="col-span-2 flex flex-col gap-1">Email<input required type="email" name="email" autocomplete="email" class={`${field} px-3`} /></label>
-      <label class="flex flex-col gap-1 min-w-0">Arrival<input required type="date" name="arrival" class={`${field} px-2 min-w-0`} /></label>
-      <label class="flex flex-col gap-1 min-w-0">Departure<input required type="date" name="departure" class={`${field} px-2 min-w-0`} /></label>
-      <label class="flex flex-col gap-1">Adults<select name="guests" class={`${field} px-3`}><option>1</option><option selected>2</option><option>3</option><option>4</option></select></label>
-      <label class="flex flex-col gap-1 min-w-0">Apartment<select name="apartment" class={`${field} px-3 min-w-0`}><option>Any</option>{property.units.map((unit) => <option selected={unit.name === selected}>{unit.name}</option>)}</select></label>
-      <label class="col-span-2 flex flex-col gap-1">Message<textarea name="message" rows="3" class={`${field} px-3`}></textarea></label>
-      <button class="col-span-2 btn-primary mt-2">Send enquiry</button>
+    <h2 id="enquiry-title" class="font-serif text-3xl">{t("Send enquiry")}</h2>
+    <p class="text-muted mt-2">{t("We'll reply with availability and the price for your dates.")}</p>
+    <form class="mt-6 grid grid-cols-2 gap-3 text-sm" data-enquiry data-preview-message={t('Preview: enquiries are not sent yet.')}>
+      <label class="col-span-2 flex flex-col gap-1">{t("Name")}<input required name="name" autocomplete="name" class={`${field} px-3`} /></label>
+      <label class="col-span-2 flex flex-col gap-1">{t("Email")}<input required type="email" name="email" autocomplete="email" class={`${field} px-3`} /></label>
+      <label class="flex flex-col gap-1 min-w-0">{t("Arrival")}<input required type="date" name="arrival" class={`${field} px-2 min-w-0`} /></label>
+      <label class="flex flex-col gap-1 min-w-0">{t("Departure")}<input required type="date" name="departure" class={`${field} px-2 min-w-0`} /></label>
+      <label class="flex flex-col gap-1">{t("Adults")}<select name="guests" class={`${field} px-3`}><option>1</option><option selected>2</option><option>3</option><option>4</option></select></label>
+      <label class="flex flex-col gap-1 min-w-0">{t("Apartment")}<select name="apartment" class={`${field} px-3 min-w-0`}><option value="Any">{t('Any')}</option>{property.units.map((unit) => <option selected={unit.name === selected}>{unit.name}</option>)}</select></label>
+      <label class="col-span-2 flex flex-col gap-1">{t("Message")}<textarea name="message" rows="3" class={`${field} px-3`}></textarea></label>
+      <button class="col-span-2 btn-primary mt-2">{t("Send enquiry")}</button>
       <p class="col-span-2 text-muted" role="status" data-status></p>
     </form>
   </div>
@@ -34,6 +37,6 @@ const field = 'border border-ink/50 rounded-xl py-2.5 bg-white text-base';
   // No delivery target yet: the form never sends.
   form?.addEventListener('submit', (event) => {
     event.preventDefault();
-    if (status) status.textContent = 'Preview: enquiries are not sent yet.';
+    if (status) status.textContent = form.dataset.previewMessage ?? '';
   });
 </script>

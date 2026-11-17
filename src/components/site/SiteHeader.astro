@@ -1,19 +1,130 @@
 ---
 import type { Property } from '../../domain/property';
+import { translator, localeFromPath, localePath } from '../../i18n';
 import Logo from './Logo.astro';
-interface Props { property: Property; /** White text over the homepage hero photo. */ overlay?: boolean }
+import { unitPath } from '../../domain/unit-path';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+
+interface Props { property: Property; overlay?: boolean }
 const { property, overlay = false } = Astro.props;
-const link = 'hover:underline underline-offset-4';
+const locale = localeFromPath(Astro.url.pathname);
+const t = translator(locale);
+const links = [
+  { label: 'Apartments', section: 'apartments' },
+  ...(property.bookingRating ? [{ label: 'Reviews', section: 'reviews' }] : []),
+  { label: 'Location', section: 'location' },
+];
+const focus = 'focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current';
 ---
-<header class:list={['relative', overlay ? 'text-white text-shadow-sm text-shadow-dark/70 bg-linear-to-b from-dark/75 via-dark/35 to-transparent pb-10' : 'text-ink border-b border-ink/10']}>
-  <div class="mx-auto w-full max-w-7xl px-4 sm:px-6 h-20 flex items-center justify-between gap-4">
-    <Logo {property} />
-    <nav class="hidden md:flex gap-8 text-lg font-semibold" aria-label="Main navigation">
-      <a href="/#apartments" class={link}>Apartments</a>
-      {property.bookingRating && <a href="/#reviews" class={link}>Reviews</a>}
-      <a href="/#location" class={link}>Location</a>
+<header data-site-header class:list={['relative z-40', overlay ? 'text-white bg-linear-to-b from-dark/80 via-dark/40 to-transparent pb-8' : 'text-ink bg-bg border-b border-ink/10']}>
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 h-20 lg:h-24 flex items-center justify-between gap-4 lg:gap-6 xl:gap-8">
+    <div class="shrink-0 lg:flex-1"><Logo {property} /></div>
+
+    <nav class="hidden lg:flex shrink-0 items-center justify-center gap-6 xl:gap-9" aria-label={t('Main navigation')}>
+      {links.map(link => link.section === 'apartments' ? (
+        <details data-header-disclosure data-desktop-apartments class="group/desktop-apartments relative">
+          <summary aria-controls="desktop-apartments" class:list={['flex items-center gap-2 py-3 text-lg font-semibold tracking-wide cursor-pointer list-none [&::-webkit-details-marker]:hidden hover:opacity-70 transition-opacity', focus]}>
+            {t(link.label)}
+            <svg class="size-4 transition-transform group-open/desktop-apartments:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+          </summary>
+          <ul id="desktop-apartments" class="absolute left-1/2 top-full mt-3 w-80 xl:w-96 -translate-x-1/2 rounded-xl border border-ink/10 bg-bg text-ink p-2 shadow-xl shadow-dark/15">
+            {property.units.map(unit => (
+              <li><a href={unitPath(unit, locale)} aria-current={Astro.url.pathname === unitPath(unit, locale) ? 'page' : undefined}
+                class:list={['block rounded-lg px-4 py-3 text-base leading-snug transition-colors hover:bg-soft hover:text-accent', focus, Astro.url.pathname === unitPath(unit, locale) && 'bg-soft font-semibold']}>{unit.name}</a></li>
+            ))}
+          </ul>
+        </details>
+      ) : (
+        <a href={`${localePath(locale)}#${link.section}`} class:list={['relative py-3 text-lg font-semibold tracking-wide transition-opacity hover:opacity-70', focus]}>{t(link.label)}</a>
+      ))}
     </nav>
-    <!-- Below lg the page's own enquiry buttons are used (hero, apartment pages). -->
-    <a href="#enquiry" class:list={['max-lg:hidden', overlay ? 'btn bg-white text-dark text-shadow-none hover:bg-soft' : 'btn-primary']}>Send enquiry</a>
+
+    <div class="hidden lg:flex flex-1 items-center justify-end gap-4 xl:gap-6">
+      <LanguageSwitcher />
+      <a href="#enquiry" class:list={['text-sm', focus, overlay ? 'btn bg-bg text-ink hover:bg-white shadow-sm' : 'btn-primary']}>{t('Send enquiry')}</a>
+    </div>
+
+    <!-- Native disclosure works without JavaScript. The panel is fixed so hero cropping never clips it. -->
+    <details data-header-disclosure data-mobile-menu class="group lg:hidden">
+      <summary data-open-label={t('Open menu')} data-close-label={t('Close menu')} aria-label={t('Open menu')} aria-controls="mobile-navigation"
+        class:list={['relative flex size-12 sm:w-auto sm:px-4 items-center justify-center gap-2 rounded-full border border-current/25 cursor-pointer list-none [&::-webkit-details-marker]:hidden transition-colors', overlay ? 'bg-white/10 hover:bg-white/20' : 'hover:bg-soft', focus]}>
+        <span class="hidden sm:inline text-sm font-semibold">{t('Menu')}</span>
+        <svg class="size-5 group-open:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
+        <svg class="hidden size-5 group-open:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" /></svg>
+      </summary>
+      <div id="mobile-navigation" class="fixed top-24 inset-x-4 sm:left-auto sm:right-6 sm:w-[400px] max-h-[calc(100dvh-7rem)] overflow-y-auto overscroll-contain rounded-2xl border border-ink/10 bg-bg text-ink p-6 shadow-2xl shadow-dark/25 motion-safe:animate-fade">
+        <nav aria-label={t('Main navigation')} class="divide-y divide-ink/10">
+          {links.map(link => link.section === 'apartments' ? (
+            <details open data-apartments-menu class="group/apartments pb-3">
+              <summary aria-controls="mobile-apartments" class:list={['flex items-center justify-between gap-4 py-3 font-serif text-3xl cursor-pointer list-none [&::-webkit-details-marker]:hidden', focus]}>
+                <a href={`${localePath(locale)}#apartments`} class:list={['py-1 hover:text-accent transition-colors', focus]}>{t(link.label)}</a>
+                <span class="flex size-11 shrink-0 items-center justify-center rounded-full hover:bg-soft">
+                  <svg class="size-5 text-muted transition-transform group-open/apartments:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+                </span>
+              </summary>
+              <ul id="mobile-apartments" class="space-y-1 border-l border-ink/15 pl-3">
+                {property.units.map(unit => (
+                  <li><a href={unitPath(unit, locale)} aria-current={Astro.url.pathname === unitPath(unit, locale) ? 'page' : undefined}
+                    class:list={['block rounded-lg px-3 py-2.5 text-base leading-snug transition-colors hover:bg-soft hover:text-accent', focus, Astro.url.pathname === unitPath(unit, locale) && 'bg-soft font-semibold']}>{unit.name}</a></li>
+                ))}
+              </ul>
+            </details>
+          ) : (
+            <a href={`${localePath(locale)}#${link.section}`} class:list={['group/link flex items-center justify-between gap-4 py-4 font-serif text-3xl transition-colors hover:text-accent', focus]}>
+              {t(link.label)}
+              <svg class="size-5 text-muted transition-transform motion-safe:group-hover/link:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" /></svg>
+            </a>
+          ))}
+        </nav>
+        <div class="mt-6 border-t border-ink/10 pt-6">
+          <p class="mb-3 text-xs font-semibold uppercase tracking-[.14em] text-muted">{t('Language')}</p>
+          <LanguageSwitcher expanded />
+        </div>
+        <a href="#enquiry" class:list={['btn-primary mt-6 w-full text-center', focus]}>{t('Send enquiry')}</a>
+      </div>
+    </details>
   </div>
 </header>
+<script>
+  const header = document.querySelector<HTMLElement>('[data-site-header]');
+  if (header) {
+    const disclosures = [...header.querySelectorAll<HTMLDetailsElement>('[data-header-disclosure]')];
+    const close = (details: HTMLDetailsElement, restoreFocus = false) => {
+      details.open = false;
+      if (restoreFocus) details.querySelector('summary')?.focus();
+    };
+    disclosures.forEach(details => {
+      const summary = details.querySelector('summary')!;
+      const sync = () => {
+        summary.setAttribute('aria-expanded', String(details.open));
+        const label = details.open ? summary.dataset.closeLabel : summary.dataset.openLabel;
+        if (label) summary.setAttribute('aria-label', label);
+      };
+      sync();
+      details.addEventListener('toggle', () => {
+        sync();
+        if (details.open) disclosures.filter(other => other !== details).forEach(other => close(other));
+      });
+      details.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+        // Return focus before hiding the panel; an enquiry link then focuses its form.
+        close(details, true);
+        if (link.getAttribute('href') === '#enquiry') {
+          document.querySelector<HTMLInputElement>('#enquiry input[name="name"]')?.focus({ preventScroll: true });
+        }
+      }));
+      details.addEventListener('focusout', () => {
+        queueMicrotask(() => { if (!details.contains(document.activeElement)) close(details); });
+      });
+    });
+    document.addEventListener('click', event => {
+      if (!(event.target instanceof Node)) return;
+      disclosures.filter(details => details.open && !details.contains(event.target as Node)).forEach(details => close(details));
+    });
+    document.addEventListener('keydown', event => {
+      if (event.key !== 'Escape') return;
+      const open = disclosures.find(details => details.open);
+      if (open) { event.preventDefault(); close(open, true); }
+    });
+    matchMedia('(min-width: 1024px)').addEventListener('change', () => disclosures.forEach(details => close(details)));
+  }
+</script>

@@ -5,7 +5,7 @@ export type SectionId = 'intro' | 'units' | 'amenities' | 'location' | 'contact'
 
 export type SiteConfig = {
   schemaVersion: 1;
-  site: { slug: string; locale: string; url?: string; locales?: Array<'en' | 'sl'>; preview?: boolean };
+  site: { slug: string; locale: string; url?: string; locales?: Array<'en' | 'sl' | 'de' | 'it'>; preview?: boolean };
   design: {
     family?: 'classic' | 'editorial';
     colors: { primary: string; accent: string; background: string; surface: string; text: string; muted: string };

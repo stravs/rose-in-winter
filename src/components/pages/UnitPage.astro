@@ -1,20 +1,17 @@
 ---
 import SiteLayout from '../../layouts/SiteLayout.astro';
-import SiteHeader from '../../components/site/SiteHeader.astro';
-import EnquiryForm from '../../components/site/EnquiryForm.astro';
-import SiteFooter from '../../components/site/SiteFooter.astro';
-import PhotoLightbox from '../../components/site/PhotoLightbox.astro';
-import { propertyRepository } from '../../repositories/property-repository';
+import SiteHeader from '../site/SiteHeader.astro';
+import EnquiryForm from '../site/EnquiryForm.astro';
+import SiteFooter from '../site/SiteFooter.astro';
+import PhotoLightbox from '../site/PhotoLightbox.astro';
+import { translator, localePath, translatedBeds, type Locale } from '../../i18n';
 import { formatBeds, propertyLocation, unitFacts, type Property } from '../../domain/property';
-import { unitPath, unitSlug } from '../../domain/unit-path';
+import { unitPath } from '../../domain/unit-path';
 
-export async function getStaticPaths() {
-  const property = await propertyRepository.get();
-  return property?.units.map((unit) => ({ params: { slug: unitSlug(unit) }, props: { property, unitId: unit.id } })) ?? [];
-}
-
-interface Props { property: Property; unitId: string }
-const { property, unitId } = Astro.props;
+interface Props { property: Property; unitId: string; locale: Locale }
+const { property, unitId, locale } = Astro.props;
+const t = translator(locale);
+const facts = (unit: Property['units'][number]) => translatedBeds(unitFacts(unit), locale);
 const unit = property.units.find((item) => item.id === unitId)!;
 const story = property.narrative;
 const rating = property.bookingRating;
@@ -27,9 +24,9 @@ const lake = property.nearby?.find((place) => place.major);
 const highlightTitles = new Set(story?.highlights?.map((item) => item.title) ?? []);
 const amenities = unit.amenities.filter((amenity) => !highlightTitles.has(amenity));
 
-const canonical = new URL(unitPath(unit, 'en'), Astro.site ?? Astro.url.origin).href;
-const homeUrl = new URL('/', canonical).href;
-const description = `${unit.name} at ${property.name}, ${property.city}. ${unitFacts(unit)}. ${unit.description ?? ''}`.replace(/\s+/g, ' ').trim().slice(0, 158);
+const canonical = new URL(unitPath(unit, locale), Astro.site ?? Astro.url.origin).href;
+const homeUrl = new URL(localePath(locale), canonical).href;
+const description = `${t('{unit} at {property}, {city}.', { unit: unit.name, property: property.name, city: property.city ?? '' })} ${facts(unit)}. ${unit.description ?? ''}`.replace(/\s+/g, ' ').trim().slice(0, 158);
 const jsonLd = {
   '@context': 'https://schema.org',
   '@graph': [
@@ -53,21 +50,21 @@ const photoButton = 'block w-full h-full overflow-hidden bg-soft cursor-zoom-in 
 
   <main id="main">
     <section class="mx-auto max-w-7xl px-4 sm:px-6 pt-8 pb-10" aria-labelledby="unit-title">
-      <a href="/#apartments" class="text-muted hover:text-ink">← All apartments</a>
+      <a href={`${localePath(locale)}#apartments`} class="text-muted hover:text-ink">← {t('All apartments')}</a>
       <div class="mt-4 flex flex-wrap items-end justify-between gap-4">
         <div>
           <h1 id="unit-title" class="font-serif text-4xl sm:text-6xl leading-[1.02]">{unit.name}</h1>
-          <p class="mt-3 text-muted">{unitFacts(unit)}</p>
+          <p class="mt-3 text-muted">{facts(unit)}</p>
         </div>
-        {rating && <a href="/#reviews" class="flex items-center gap-3"><span class="font-serif text-4xl leading-none">{rating.value.toFixed(1)}</span><span class="text-sm text-muted"><strong class="text-ink">{rating.label}</strong><br />{rating.count} Booking.com reviews</span></a>}
+        {rating && <a href={`${localePath(locale)}#reviews`} class="flex items-center gap-3"><span class="font-serif text-4xl leading-none">{rating.value.toFixed(1)}</span><span class="text-sm text-muted"><strong class="text-ink">{rating.label}</strong><br />{rating.count} {t('Booking.com reviews')}</span></a>}
       </div>
 
       {photos.length > 0 && (
         <>
           <!-- Phones and tablets: swipe through every photo. -->
-          <div class="md:hidden mt-6 -mx-4 px-4 flex gap-3 overflow-x-auto snap-x snap-mandatory" tabindex="0" aria-label={`Photos of ${unit.name}, scroll sideways`}>
+          <div class="md:hidden mt-6 -mx-4 px-4 flex gap-3 overflow-x-auto snap-x snap-mandatory" tabindex="0" aria-label={t('Photos of {name}, scroll sideways', { name: unit.name })}>
             {photos.map((photo, index) => (
-              <button type="button" data-photo={index} class="snap-center shrink-0 w-[85%] aspect-[4/3] rounded-2xl overflow-hidden bg-soft" aria-label={`Open photo ${index + 1} of ${photos.length}`}>
+              <button type="button" data-photo={index} class="snap-center shrink-0 w-[85%] aspect-[4/3] rounded-2xl overflow-hidden bg-soft" aria-label={t('Open photo {number} of {count}', { number: index + 1, count: photos.length })}>
                 <img src={photo.url} srcset={photo.srcSet} sizes="85vw" width={photo.width} height={photo.height} alt={photo.alt ?? ''} loading="lazy" fetchpriority={index === 0 ? 'high' : undefined} decoding="async" class="w-full h-full object-cover" />
               </button>
             ))}
@@ -75,11 +72,11 @@ const photoButton = 'block w-full h-full overflow-hidden bg-soft cursor-zoom-in 
           <!-- Desktop: cover plus four. -->
           <div class="hidden md:grid mt-8 grid-cols-4 grid-rows-2 gap-3 h-[min(560px,62vh)] rounded-2xl overflow-hidden relative motion-safe:animate-rise">
             {mosaic.map((photo, index) => (
-              <button type="button" data-photo={index} class:list={[photoButton, index === 0 && 'col-span-2 row-span-2']} aria-label={`Open photo ${index + 1} of ${photos.length}`}>
+              <button type="button" data-photo={index} class:list={[photoButton, index === 0 && 'col-span-2 row-span-2']} aria-label={t('Open photo {number} of {count}', { number: index + 1, count: photos.length })}>
                 <img src={photo.url} srcset={photo.srcSet} sizes={index === 0 ? '50vw' : '25vw'} width={photo.width} height={photo.height} alt={photo.alt ?? ''} loading="lazy" fetchpriority={index === 0 ? 'high' : undefined} decoding="async" class="w-full h-full object-cover transition-transform duration-700 ease-gentle hover:scale-[1.03]" />
               </button>
             ))}
-            {photos.length > mosaic.length && <button type="button" data-photo="0" class="absolute right-4 bottom-4 btn bg-white text-ink shadow-lg hover:bg-bg">Show all {photos.length} photos</button>}
+            {photos.length > mosaic.length && <button type="button" data-photo="0" class="absolute right-4 bottom-4 btn bg-white text-ink shadow-lg hover:bg-bg">{t('Show all {count} photos', { count: photos.length })}</button>}
           </div>
         </>
       )}
@@ -88,36 +85,36 @@ const photoButton = 'block w-full h-full overflow-hidden bg-soft cursor-zoom-in 
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:grid lg:grid-cols-[1fr_360px] lg:gap-14">
       <div class="min-w-0 pb-16">
         <section data-reveal aria-labelledby="details-title">
-          <h2 id="details-title" class="font-serif text-3xl sm:text-4xl">The apartment</h2>
+          <h2 id="details-title" class="font-serif text-3xl sm:text-4xl">{t("The apartment")}</h2>
           {unit.description && <p class="mt-4 text-lg text-muted max-w-2xl">{unit.description}</p>}
           <dl class="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-6">
-            {unit.areaSquareMetres && <div><dt class="text-muted">Size</dt><dd class="font-serif text-2xl">{unit.areaSquareMetres} m²</dd></div>}
-            {unit.occupancyLabel && <div><dt class="text-muted">Sleeps</dt><dd class="font-serif text-2xl">{unit.occupancyLabel}</dd></div>}
-            {unit.rooms.map((room) => room.beds && <div class="col-span-2"><dt class="text-muted">{room.name}</dt><dd class="font-serif text-2xl">{formatBeds(room.beds)}</dd></div>)}
+            {unit.areaSquareMetres && <div><dt class="text-muted">{t("Size")}</dt><dd class="font-serif text-2xl">{unit.areaSquareMetres} m²</dd></div>}
+            {unit.occupancyLabel && <div><dt class="text-muted">{t("Sleeps")}</dt><dd class="font-serif text-2xl">{unit.occupancyLabel}</dd></div>}
+            {unit.rooms.map((room) => room.beds && <div class="col-span-2"><dt class="text-muted">{room.name}</dt><dd class="font-serif text-2xl">{translatedBeds(formatBeds(room.beds), locale)}</dd></div>)}
           </dl>
           {amenities.length > 0 && (
-            <ul class="mt-8 flex flex-wrap gap-2" aria-label="In the apartment">
+            <ul class="mt-8 flex flex-wrap gap-2" aria-label={t("In the apartment")}>
               {amenities.map((amenity) => <li class="bg-soft px-4 py-1.5 rounded-full">{amenity}</li>)}
             </ul>
           )}
-          <button type="button" data-unit={unit.name} class="lg:hidden mt-8 btn-primary">Enquire about this apartment</button>
+          <button type="button" data-unit={unit.name} class="lg:hidden mt-8 btn-primary">{t("Enquire about this apartment")}</button>
         </section>
 
         {story?.highlights && (
           <section data-reveal class="mt-16 pt-12 border-t border-ink/10" aria-labelledby="house-title">
-            <h2 id="house-title" class="font-serif text-3xl sm:text-4xl">Shared by every apartment</h2>
+            <h2 id="house-title" class="font-serif text-3xl sm:text-4xl">{t("Shared by every apartment")}</h2>
             <ul class="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-8">
               {story.highlights.map((item) => <li><strong class="block font-serif text-2xl font-normal">{item.title}</strong><span class="mt-1 block text-muted">{item.text}</span></li>)}
             </ul>
             <p class="mt-8 text-muted">
-              {propertyLocation(property, { country: false })}{lake && <> · {lake.distance} to {lake.name}</>} · <a href="/#location" class="link text-ink">See the location</a>
+              {propertyLocation(property, { country: false })}{lake && <> · {lake.name}: {lake.distance}</>} · <a href={`${localePath(locale)}#location`} class="link text-ink">{t("See the location")}</a>
             </p>
           </section>
         )}
 
         {story && (
           <section id="arrival" data-reveal class="mt-16 pt-12 border-t border-ink/10" aria-labelledby="arrival-title">
-            <h2 id="arrival-title" class="font-serif text-3xl sm:text-4xl">Good to know</h2>
+            <h2 id="arrival-title" class="font-serif text-3xl sm:text-4xl">{t("Good to know")}</h2>
             <dl class="mt-6 grid sm:grid-cols-2 gap-x-10 gap-y-6">
               {story.practical.map((item) => <div><dt class="font-semibold">{item.label}</dt><dd class="mt-1 text-muted">{item.value}</dd></div>)}
             </dl>
@@ -131,18 +128,18 @@ const photoButton = 'block w-full h-full overflow-hidden bg-soft cursor-zoom-in 
     {otherUnits.length > 0 && (
       <section class="bg-soft" aria-labelledby="other-title">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 py-16">
-          <h2 id="other-title" data-reveal class="font-serif text-3xl sm:text-4xl">Other apartments</h2>
+          <h2 id="other-title" data-reveal class="font-serif text-3xl sm:text-4xl">{t("Other apartments")}</h2>
           <ul class="mt-8 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {otherUnits.map((other, index) => {
               const cover = other.photos[0];
               return (
                 <li data-reveal style={`--reveal-delay:${index * 100}ms`}>
-                  <a href={unitPath(other, 'en')} class="group block">
+                  <a href={unitPath(other, locale)} class="group block">
                     <div class="overflow-hidden rounded-2xl">
                     {cover && <img src={cover.url} srcset={cover.srcSet} sizes="(max-width: 640px) 92vw, (max-width: 1024px) 46vw, 23vw" width={cover.width} height={cover.height} alt="" loading="lazy" decoding="async" class="w-full aspect-[4/3] object-cover bg-bg transition-transform duration-700 ease-gentle group-hover:scale-[1.04]" />}
                     </div>
                     <h3 class="mt-4 font-serif text-2xl transition-colors group-hover:text-accent">{other.name}</h3>
-                    <p class="mt-1 text-muted">{unitFacts(other)}</p>
+                    <p class="mt-1 text-muted">{facts(other)}</p>
                   </a>
                 </li>
               );

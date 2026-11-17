@@ -1,0 +1,26 @@
+---
+import HomePage from '../components/pages/HomePage.astro';
+import UnitPage from '../components/pages/UnitPage.astro';
+import { propertyRepository } from '../repositories/property-repository';
+import { locales, localePath, translatedProperty, type Locale } from '../i18n';
+import { unitPath } from '../domain/unit-path';
+import type { Property } from '../domain/property';
+
+export async function getStaticPaths() {
+  const property = await propertyRepository.get();
+  if (!property) throw new Error('Missing property data');
+  return locales.flatMap(locale => {
+    const localized = translatedProperty(property, locale);
+    return [
+      { params: { path: localePath(locale).replace(/^\/+|\/+$/g, '') || undefined }, props: { property: localized, locale } },
+      ...localized.units.map(unit => ({
+        params: { path: unitPath(unit, locale).replace(/^\/+|\/+$/g, '') },
+        props: { property: localized, locale, unitId: unit.id },
+      })),
+    ];
+  });
+}
+interface Props { property: Property; locale: Locale; unitId?: string }
+const { property, locale, unitId } = Astro.props;
+---
+{unitId ? <UnitPage {property} {locale} {unitId} /> : <HomePage {property} {locale} />}

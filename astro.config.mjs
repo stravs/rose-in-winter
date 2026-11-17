@@ -12,7 +12,7 @@ export default defineConfig({
   output: 'static',
   site: siteConfig.url ?? "http://localhost:4321",
   trailingSlash: 'always',
-  i18n: { locales: ["en"], defaultLocale: 'en', routing: { prefixDefaultLocale: false } },
+  i18n: { locales: ["en", "sl", "de", "it"], defaultLocale: 'en', routing: { prefixDefaultLocale: false } },
   integrations: siteConfig.preview ? [] : [sitemap()],
 
   vite: {
